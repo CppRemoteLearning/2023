@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/homework3.dir/file1.cpp.o CMakeFiles/homework3.dir/file2.cpp.o CMakeFiles/homework3.dir/file3.cpp.o -o homework3 
