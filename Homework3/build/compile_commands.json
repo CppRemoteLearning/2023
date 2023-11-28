@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/simon/Desktop/C++Projects/Homework3/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/homework3.dir/file1.cpp.o -c /home/simon/Desktop/C++Projects/Homework3/file1.cpp",
+  "file": "/home/simon/Desktop/C++Projects/Homework3/file1.cpp"
+},
+{
+  "directory": "/home/simon/Desktop/C++Projects/Homework3/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/homework3.dir/file2.cpp.o -c /home/simon/Desktop/C++Projects/Homework3/file2.cpp",
+  "file": "/home/simon/Desktop/C++Projects/Homework3/file2.cpp"
+},
+{
+  "directory": "/home/simon/Desktop/C++Projects/Homework3/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/homework3.dir/file3.cpp.o -c /home/simon/Desktop/C++Projects/Homework3/file3.cpp",
+  "file": "/home/simon/Desktop/C++Projects/Homework3/file3.cpp"
+}
+]
