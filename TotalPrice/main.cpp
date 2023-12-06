@@ -10,7 +10,5 @@ int main()
     }
     
     std::cout<<"Your total is: "<<GetTotalPrice(products)<< std::endl;
-    
-    std::cout<<"Wew";
     return 0;
 }
