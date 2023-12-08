@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# CMake related files
+*.cmake
+
+Makefile
+CMakeFiles/*
+CMakeCache.txt
+CMakeLists
+
