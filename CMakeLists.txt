@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 3.10) 
-project(TotalPrice) 
-add_executable(test main.cpp product.cpp functions.cpp)
+project(SmartHome) 
+
+add_executable(smart_home main.cpp sensor.cpp device.cpp room.cpp smart_home.cpp TinyXml/tinyxml2.cpp)
