@@ -1,0 +1,9 @@
+Room Type: Living Room
+Temperature: 87 (Celsius)
+Humidity: 42 (Percent)
+Room Type: Bedroom
+Temperature: 28 (Celsius)
+Humidity: 60 (Percent)
+Room Type: Kitchen
+Temperature: 85 (Celsius)
+Humidity: 48 (Percent)
