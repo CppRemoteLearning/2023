@@ -26,6 +26,9 @@
 *.a
 *.lib
 
+# Vscode
+.vscode/
+
 # Executables
 *.exe
 *.out
@@ -34,6 +37,7 @@
 # CMake related files
 *.cmake
 
+build/*
 Makefile
 CMakeFiles/*
 CMakeCache.txt

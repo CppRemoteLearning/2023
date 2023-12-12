@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SmartHome name="Casa smart">
+  <Room name="Sufragerie">
+    <Device name="TV" />
+    <Device name="Lampa" />
+    <Sensor name="Luminozitate" />
+  </Room>
+  <Room name="Bucatarie">
+    <Device name="Aragaz" />
+    <Device name="Hota" />
+    <Sensor name="Senzor gaz" />
+    <Sensor name="Temperatura" />
+  </Room>
+  <Room name="Dormitor">
+    <Device name="Bec" />
+    <Device name="TV" />
+    <Sensor name="Temperatura" />
+  </Room>
+</SmartHome>
