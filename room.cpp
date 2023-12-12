@@ -12,9 +12,9 @@ void Room::DeleteSensor(const std::string &name)
     sensors_.erase(sensors_.find(name));
 }
 
-Sensor Room::GetSensor(const std::string &name)
+Sensor* Room::GetSensor(const std::string &name)
 {
-    return sensors_.find(name)->second;
+    return &sensors_.find(name)->second;
 }
 
 void Room::AddDevice(Device &device)
@@ -27,9 +27,9 @@ void Room::DeleteDevice(const std::string &name)
     devices_.erase(devices_.find(name));
 }
 
-Device Room::GetDevice(const std::string &name)
+Device* Room::GetDevice(const std::string &name)
 {
-    return devices_.find(name)->second;
+    return &devices_.find(name)->second;
 }
 
 std::string Room::GetName()

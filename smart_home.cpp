@@ -1,28 +1,25 @@
 #include "smart_home.h"
 
-void SmartHome::GetDataFromXml(const std::string &filename) {
+void SmartHome::GetDataFromXml(const char* filename) {
     tinyxml2::XMLDocument xmlDoc;
-    if (xmlDoc.LoadFile(filename.c_str()) != tinyxml2::XML_SUCCESS) {
-        std::cout << "Error loading file!" << std::endl;
-        return;
+    tinyxml2::XMLError err = xmlDoc.LoadFile(filename);
+    if (err != tinyxml2::XML_SUCCESS) {
+        throw std::invalid_argument("Error loading file!");
     }
 
     tinyxml2::XMLNode* pRoot = xmlDoc.RootElement();
     if (pRoot == nullptr) {
-        std::cout << "Invalid XML format or missing 'SmartHome' node!" << std::endl;
-        return;
+        throw std::invalid_argument("Invalid XML format!");
     }
 
-
-    std::cout << "Parent Element: " << pRoot->Value() << std::endl;
-
-    tinyxml2::XMLElement* pRoomElement = pRoot->FirstChildElement("Room");
-
-    std::cout << "Room Element: " << pRoomElement->Value() << std::endl;
+    tinyxml2::XMLElement* pRoomElement = pRoot->FirstChildElement();
+    
+    if (pRoomElement == nullptr) {
+        throw std::invalid_argument("Room element is null!");
+    }
 
     for (pRoomElement; pRoomElement != nullptr; pRoomElement = pRoomElement->NextSiblingElement("Room")) {
         const char* roomName = pRoomElement->Attribute("name");
-        std::cout << "Reading Room: " << roomName << std::endl;
 
         Room room(roomName);
 
@@ -33,7 +30,6 @@ void SmartHome::GetDataFromXml(const std::string &filename) {
             sensorElement->QueryFloatAttribute("value", &sensorValue);
             Sensor sensor(sensorName, sensorType, sensorValue);
             room.AddSensor(sensor);
-            std::cout << "Added Sensor: " << sensorName << std::endl;
         }
 
         for (tinyxml2::XMLElement* deviceElement = pRoomElement->FirstChildElement("Device"); deviceElement != nullptr; deviceElement = deviceElement->NextSiblingElement("Device")) {
@@ -43,7 +39,6 @@ void SmartHome::GetDataFromXml(const std::string &filename) {
             deviceElement->QueryBoolAttribute("status", &deviceStatus);
             Device device(deviceName, deviceType, deviceStatus);
             room.AddDevice(device);
-            std::cout << "Added Device: " << deviceName << std::endl;
         }
 
         rooms_.insert({ room.GetName(), room });
@@ -82,16 +77,16 @@ void SmartHome::AddToXml(const std::string &filename)
 
         tinyxml2::XMLError eResult = xmlDoc.SaveFile(filename.c_str());
         if (eResult != tinyxml2::XML_SUCCESS) {
-            std::cout << "Error saving to file!" << std::endl;
+            throw std::invalid_argument("Error saving to file!");
         }
 }
 
-std::unordered_map<std::string, Room> SmartHome::GetRooms()
+std::unordered_map<std::string, Room>* SmartHome::GetRooms()
 {
-    return rooms_;
+    return &rooms_;
 }
 
-Room SmartHome::GetRoom(const std::string &roomName)
+Room* SmartHome::GetRoom(const std::string &roomName)
 {
-    return rooms_.find(roomName)->second;
+    return &rooms_.find(roomName)->second;
 }

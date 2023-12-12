@@ -1,19 +1,34 @@
-#include <iostream>
-#include <fstream>
 #include <vector>
+#include <iostream>
 #include "smart_home.h"
 
 int main()
 {
     SmartHome smartHome;
+    try
+    {
+        smartHome.GetDataFromXml("../data.xml");
+        
+        //Device device("BathroomDoor", "Door", true);
+        //Sensor presence("PresenceSensor", "Presence", 0);
+        
+        // Room *living = smartHome.GetRoom("LivingRoom");
+        // living->AddSensor(presence);
+        // living->AddDevice(device);
 
-    smartHome.GetDataFromXml("data.xml");
-    //smartHome.Add(Sensor("PresenceSensor", "Presence"));
-    Sensor lightSensor = smartHome.GetRoom("LivingRoom").GetSensor("LightSensor");
-    std::cout<<lightSensor.GetName()<<std::endl<<lightSensor.GetType()<<std::endl<<lightSensor.GetValue();
+        Sensor *lightSensor = smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor");
+        float val = lightSensor->GetValue();
+        std::cout<< val;
+        lightSensor->SetValue(200);
+        std::cout<<smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor")->GetValue();
 
-    smartHome.AddToXml("data.xml");
+        smartHome.AddToXml("../data.xml");
 
-
+    }
+    catch(const std::invalid_argument& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
     return 0;
 }

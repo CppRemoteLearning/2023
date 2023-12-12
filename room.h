@@ -12,11 +12,11 @@ public:
 
     void AddSensor(Sensor &sensor);
     void DeleteSensor(const std::string &name);
-    Sensor GetSensor(const std::string &name);
+    Sensor* GetSensor(const std::string &name);
 
     void AddDevice(Device &device);
     void DeleteDevice(const std::string &name);
-    Device GetDevice(const std::string &name);
+    Device* GetDevice(const std::string &name);
 
     std::string GetName();
     void SetName(const std::string &name);
