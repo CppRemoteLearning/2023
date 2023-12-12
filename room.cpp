@@ -4,35 +4,65 @@ Room::Room(const std::string &name): name_{name} {}
 
 void Room::AddSensor(Sensor &sensor)
 {
-    sensors_.insert({sensor.GetName(), sensor});
+    sensors_.push_back(sensor);
 }
 
 void Room::DeleteSensor(const std::string &name)
 {
-    sensors_.erase(sensors_.find(name));
+    for (int i = 0; i < sensors_.size(); i++)
+    {
+        if (sensors_[i].GetName() == name)
+        {
+            sensors_.erase(sensors_.begin() + i);
+            return;
+        }
+        
+    }
 }
 
 Sensor* Room::GetSensor(const std::string &name)
 {
-    return &sensors_.find(name)->second;
+    for (auto &sensor : sensors_)
+    {
+        if (sensor.GetName() == name)
+        {
+            return &sensor;
+        }
+    }
+
+    return nullptr;
 }
 
 void Room::AddDevice(Device &device)
 {
-    devices_.insert({device.GetName(), device});
+    devices_.push_back(device);
 }
 
 void Room::DeleteDevice(const std::string &name)
 {
-    devices_.erase(devices_.find(name));
+    for (int i = 0; i < devices_.size(); i++)
+    {
+        if (devices_[i].GetName() == name)
+        {
+            devices_.erase(devices_.begin() + i);
+            return;
+        }
+    }
 }
 
 Device* Room::GetDevice(const std::string &name)
 {
-    return &devices_.find(name)->second;
+    for (auto &device : devices_)
+    {
+        if (device.GetName() == name)
+        {
+            return &device;
+        }
+    }
+    return nullptr;
 }
 
-std::string Room::GetName()
+std::string& Room::GetName()
 {
     return name_;
 }
@@ -42,12 +72,12 @@ void Room::SetName(const std::string &name)
     name_ = name;
 }
 
-std::unordered_map<std::string, Sensor> Room::GetSensors()
+std::vector<Sensor>& Room::GetSensors()
 {
     return sensors_;
 }
 
-std::unordered_map<std::string, Device> Room::GetDevices()
+std::vector<Device>& Room::GetDevices()
 {
     return devices_;
 }

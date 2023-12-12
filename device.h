@@ -1,15 +1,17 @@
 #ifndef DEVICE_H
 #define DEVICE_H
+
 #include <string>
+
 class Device
 {
 public:
     Device(const std::string &name = "", const std::string &type = "", bool status = false);
 
-    std::string GetName();
+    std::string& GetName();
     void SetName(const std::string &name);
 
-    std::string GetType();
+    std::string& GetType();
     void SetType(const std::string &type);
 
     bool GetStatus();

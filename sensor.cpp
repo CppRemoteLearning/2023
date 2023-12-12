@@ -1,6 +1,6 @@
 #include "sensor.h"
 
-std::string Sensor::GetName()
+std::string& Sensor::GetName()
 {
     return name_;
 }
@@ -10,7 +10,7 @@ void Sensor::SetName(const std::string &name)
     name_ = name;
 }
 
-std::string Sensor::GetType()
+std::string& Sensor::GetType()
 {
     return type_;
 }

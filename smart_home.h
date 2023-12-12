@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <unordered_map>
+
 #include "room.h"
 #include "TinyXml/tinyxml2.h"
 
@@ -12,11 +13,13 @@ public:
     void GetDataFromXml(const char* filename);
     void AddToXml(const std::string &filename);
 
-    std::unordered_map<std::string, Room>* GetRooms();
+    std::vector<Room>* GetRooms();
     Room* GetRoom(const std::string &roomName);
 
 private:
-    std::unordered_map<std::string, Room> rooms_;
+    Sensor& getSensorFromXml(tinyxml2::XMLElement* sensorElement);
+    Device& getDeviceFromXml(tinyxml2::XMLElement* deviceElement);
+    std::vector<Room> rooms_;
     
 };
 

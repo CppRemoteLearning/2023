@@ -1,7 +1,8 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include <unordered_map>
+#include <vector>
+
 #include "sensor.h"
 #include "device.h"
 
@@ -18,20 +19,19 @@ public:
     void DeleteDevice(const std::string &name);
     Device* GetDevice(const std::string &name);
 
-    std::string GetName();
+    std::string& GetName();
     void SetName(const std::string &name);
 
-    std::unordered_map<std::string, Sensor> GetSensors();
-    std::unordered_map<std::string, Device> GetDevices();
+    std::vector<Sensor>& GetSensors();
+    std::vector<Device>& GetDevices();
 
 
 private:
     std::string name_;
-    std::unordered_map<std::string, Sensor> sensors_;
-    std::unordered_map<std::string, Device> devices_;
-    // I choosed unordered_map because I have instant acces to elements, for example:
-    // If I have to look for a humidity sensor, I look for the element with that key
-    // In the others containers like list or vector I should iterate over it until I find my sensor with that name  
+    std::vector<Sensor> sensors_;
+    std::vector<Device> devices_;
+    // I choosed vector because it's enough for what I need
+    // List could be a good option too  
 };
 
 #endif

@@ -8,7 +8,6 @@
     <Room name="LivingRoom">
         <Sensor name="LightSensor" type="Light" value="200"/>
         <Sensor name="TemperatureSensor" type="Temperature" value="20"/>
-        <Sensor name="PresenceSensor" type="Presence" value="0"/>
         <Device name="BathroomDoor" type="Door" status="true"/>
         <Device name="KitchenDoor" type="Door" status="true"/>
         <Device name="LightBulb" type="Light" status="false"/>

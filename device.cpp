@@ -7,7 +7,7 @@ void Device::SetName(const std::string &name)
     name_ = name;
 }
 
-std::string Device::GetName()
+std::string& Device::GetName()
 {
     return name_; 
 }
@@ -17,7 +17,7 @@ void Device::SetType(const std::string &type)
     type_ = type;
 }
 
-std::string Device::GetType()
+std::string& Device::GetType()
 {
     return type_;
 }

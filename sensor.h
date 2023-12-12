@@ -1,15 +1,16 @@
 #ifndef SENSOR_H
 #define SENSOR_H
+
 #include <string>
 
 class Sensor
 {
 public:
     Sensor(const std::string &name = "", const std::string &type = "", float value = 0);
-    std::string GetName();
+    std::string& GetName();
     void SetName(const std::string &name);
 
-    std::string GetType(); 
+    std::string& GetType(); 
     void SetType(const std::string &type);
 
     float GetValue();

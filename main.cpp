@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+
 #include "smart_home.h"
 
 int main()
@@ -16,11 +17,16 @@ int main()
         // living->AddSensor(presence);
         // living->AddDevice(device);
 
+        //smartHome.GetRoom("LivingRoom")->DeleteSensor("PresenceSensor");
+
         Sensor *lightSensor = smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor");
-        float val = lightSensor->GetValue();
-        std::cout<< val;
-        lightSensor->SetValue(200);
-        std::cout<<smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor")->GetValue();
+        if (lightSensor != nullptr)
+        {
+            float val = lightSensor->GetValue();
+            std::cout<< val;
+            lightSensor->SetValue(200);
+            std::cout<<smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor")->GetValue();
+        }
 
         smartHome.AddToXml("../data.xml");
 
