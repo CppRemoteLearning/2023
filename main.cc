@@ -1,11 +1,10 @@
 #include <iostream>
-#include "User.h"
-
+#include "user/User.h"
 
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
-    User user(3, 2);
-    user.userHouse.writeDataToFile();
+    SmartHome::User user(3, 2);
+    user.getUserHouse().writeDataToFile();
     std::cout << "Demo Control Devices\n";
     user.controlDevicesDemo();
     std::cout << std::endl;

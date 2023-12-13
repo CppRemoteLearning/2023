@@ -1,31 +1,59 @@
-#ifndef NAGARROREMOTELEARNING_USER_H
-#define NAGARROREMOTELEARNING_USER_H
+#include "User.h"
 
-
-#include <fstream>
-#include <vector>
-#include <ctime>
-#include "House.h"
-#include "Device.h"
-
-class User {
-private:
-    std::vector<Device*> devices;
-public:
-    House userHouse;
-
-    User(int numRooms, int numSensorsPerRoom) : userHouse(numRooms, numSensorsPerRoom) {
+namespace SmartHome {
+    User::User(int numRooms, int numSensorsPerRoom) : userHouse(numRooms, numSensorsPerRoom) {
         devices.push_back(new Device(LIGHT));
         devices.push_back(new Device(HEATER));
     }
 
-    ~User() {
-        for (Device* device : devices) {
+    User::~User() {
+        for (Device *device: devices) {
             delete device;
         }
     }
 
-    void controlDevicesDemo() {
+    User::User(const User& other) : userHouse(other.userHouse) {
+        devices.reserve(other.devices.size());
+        for (Device* device : other.devices) {
+            devices.push_back(new Device(*device));
+        }
+    }
+
+    User::User(User&& other) : userHouse(std::move(other.userHouse)), devices(std::move(other.devices)) {
+        other.devices.clear();
+    }
+
+    User& User::operator=(User&& other) {
+        if (this != &other) {
+            userHouse = std::move(other.userHouse);
+
+            for (Device* device : devices) {
+                delete device;
+            }
+            devices = std::move(other.devices);
+            other.devices.clear();
+        }
+        return *this;
+    }
+
+    User& User::operator=(const User& other) {
+        if (this != &other) {
+            userHouse = other.userHouse;
+
+            for (Device* device : devices) {
+                delete device;
+            }
+            devices.clear();
+
+            devices.reserve(other.devices.size());
+            for (Device* device : other.devices) {
+                devices.push_back(new Device(*device));
+            }
+        }
+        return *this;
+    }
+
+    void User::controlDevicesDemo() {
         while (true) {
             std::cout << "Enter a device type (0 = Light, 1 = Heater): ";
             int deviceType;
@@ -35,7 +63,7 @@ public:
                 int deviceStatus;
                 std::cin >> deviceStatus;
                 if (deviceStatus == 0 || deviceStatus == 1) {
-                    devices[deviceType]->status = deviceStatus;
+                    devices[deviceType]->setDeviceStatus(deviceStatus);
                     std::cout << "Device status changed." << std::endl;
                     break;
                 } else {
@@ -47,13 +75,13 @@ public:
         }
     }
 
-    void getDevicesStatus() {
-        for (Device* device : devices) {
-            device->displayStatus();
+    void User::getDevicesStatus() {
+        for (Device *device: devices) {
+            device->displayStatuses();
         }
     }
 
-    void readSensorDataFromRoom(RoomType roomType) {
+    void User::readSensorDataFromRoom(RoomType roomType) {
         std::ifstream inFile("house_data.txt");
         if (inFile.is_open()) {
             std::string line;
@@ -95,7 +123,7 @@ public:
         }
     }
 
-    void readSensorDataFromRoomDemo(){
+    void User::readSensorDataFromRoomDemo() {
         while (true) {
             std::cout << "Enter a room type (0 = Living Room, 1 = Bedroom, 2 = Kitchen): ";
             int roomType;
@@ -109,6 +137,11 @@ public:
         }
     }
 
-};
+    House User::getUserHouse() const {
+        return userHouse;
+    }
 
-#endif
+    void User::setUserHouse(const House &house) {
+        userHouse = house;
+    }
+}
