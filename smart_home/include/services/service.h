@@ -11,15 +11,15 @@ namespace services {
 
 class Service {
     public:
-      virtual std::vector<sensors::Sensor*> sensors() = 0;
+      virtual std::vector<sensors::Sensor*> GetSensors() = 0;
       
-      virtual std::vector<devices::Device*> devices() = 0;
+      virtual std::vector<devices::Device*> GetDevices() = 0;
 
     protected:
-      std::vector<sensors::Sensor*> sensors_;
-      std::vector<devices::Device*> devices_;
+      std::vector<sensors::Sensor*> sensors;
+      std::vector<devices::Device*> devices;
 };
 
-}
+} // namespace services
 
 #endif // SMART_HOME_SERVICES_SERVICE_H_

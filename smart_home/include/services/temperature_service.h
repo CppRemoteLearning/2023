@@ -2,6 +2,7 @@
 #define SMART_HOME_SERVICES_TEMPERATURE_SERVICE_H_
 
 #include "service.h"
+#include "../sensors/temperature_sensor.h"
 
 namespace services {
 
@@ -9,15 +10,15 @@ namespace services {
 
 class TemperatureService : public Service {
   public:
-    inline std::vector<sensors::Sensor*> sensors() override {
-        return sensors_;
+    inline std::vector<sensors::Sensor*> GetSensors() override {
+        return sensors;
     }
 
-    inline std::vector<devices::Device*> devices() override {
-        return devices_;
+    inline std::vector<devices::Device*> GetDevices() override {
+        return devices;
     }
 
-    void AddSensor(sensors::Sensor* sensor);
+    void AddSensor(sensors::TemperatureSensor* sensor);
 
     void AddDevice(devices::Device* device);
 

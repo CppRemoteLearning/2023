@@ -6,46 +6,33 @@
 
 namespace devices {
 
-// Rule of Five
+// Rule of Zero
 
 class AcUnit : public Device {
   public:
-    AcUnit(rooms::Room* room): Device(room), is_on_(false), fan_speed_(0) {}
+    AcUnit(rooms::Room* room): Device(room) {}
 
-    rooms::Room* room() override {
-        return room_;
+    rooms::Room* GetRoom() override {
+        return room;
     }
 
-    inline bool is_on() {
-        return is_on_;
+    inline int GetFanSpeed() {
+        return fan_speed;
     }
 
-    inline void set_is_on(bool value) {
-        is_on_ = value;
+    void SetFanSpeed(int value);
+
+    inline float GetDesiredTemperature() {
+        return desired_temperature;
     }
 
-    inline int fan_speed() {
-        return fan_speed_;
-    }
+    void SetDesiredTemperature(float value);
 
-    inline void set_fan_speed(int value) {
-        fan_speed_ = value;
-    }
-
-    inline float desired_temperature() {
-        return desired_temperature_;
-    }
-
-    inline void set_desired_temperature(float value) {
-        desired_temperature_ = value;
-    }
-
-    ~AcUnit() override = default;
+    void SetOnAuto(sensors::Sensor* sensor) override;
 
   private:
-    bool is_on_;
-    int fan_speed_;
-    float desired_temperature_;
+    unsigned char fan_speed = 0;
+    float desired_temperature = 21;
 };
 
 } // namespace devices

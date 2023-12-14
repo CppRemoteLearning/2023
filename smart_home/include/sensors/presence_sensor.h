@@ -1,24 +1,24 @@
 #ifndef SMART_HOME_SENSORS_PRESENCE_SENSOR_H_
 #define SMART_HOME_SENSORS_PRESENCE_SENSOR_H_
 
+#include "sensor.h"
+
 namespace sensors {
   
-// Rule of Five
+// Rule of Zero
 
-class PresenceSensor {
+class PresenceSensor : public Sensor {
   public:
-    inline bool is_any_presence() {
-        return is_any_presence_;
+    inline std::any GetData() override {
+        return is_any_presence;
     }
 
-    inline void set_is_any_presence(bool value) {
-        is_any_presence_ = value;
+    inline void SetData(const std::any &data) override {
+        is_any_presence = std::any_cast<bool>(data);
     }
-
-    ~PresenceSensor() override = default;
 
   private:
-    bool is_any_presence_;
+    bool is_any_presence = false;
 };
 
 } // namespace sensors

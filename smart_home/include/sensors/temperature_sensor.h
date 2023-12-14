@@ -6,28 +6,26 @@
 
 namespace sensors {
 
-// Rule of Five
+// Rule of Zero
 
-class TemperatureSensor: public Sensor {
+class TemperatureSensor : public Sensor {
   public:
     TemperatureSensor(rooms::Room* room): Sensor(room) {}
 
-    inline rooms::Room* room() override {
-      return room_;
+    inline rooms::Room* GetRoom() override {
+      return room;
     }
 
-    inline float current_temperature() {
-        return current_temperature_;
+    inline std::any GetData() {
+        return current_temperature;
     }
 
-    inline void set_current_temperature(float value) {
-        current_temperature_ = value;
+    inline void SetData(const std::any &data) {
+        current_temperature = std::any_cast<float>(data);
     }
-
-    ~TemperatureSensor() override = default;
 
   private:
-    float current_temperature_;
+    float current_temperature = 0;
 };
 
 } // namespace sensors

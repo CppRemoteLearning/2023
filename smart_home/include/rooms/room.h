@@ -7,12 +7,14 @@ namespace rooms {
 
 class Room {
   public:
-    virtual float size() = 0;
+    Room(const float size): size(size) {}
 
-  protected:
-    Room(const float size): size_(size) {}
+    inline float GetSize() {
+      return size;
+    };
 
-    const float size_;
+  private:
+    const float size = 0;
 };
 
 } // namespace rooms

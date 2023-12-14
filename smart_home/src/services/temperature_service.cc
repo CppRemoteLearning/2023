@@ -5,61 +5,35 @@
 
 namespace services {
 
-void TemperatureService::AddSensor(sensors::Sensor* sensor) {
-    sensors_.push_back(sensor);
+void TemperatureService::AddSensor(sensors::TemperatureSensor* sensor) {
+    sensors.push_back(sensor);
 }
 
 void TemperatureService::AddDevice(devices::Device* device) {
-    devices_.push_back(device);
+    devices.push_back(device);
 }
 
 void TemperatureService::Refresh() {
-    for (sensors::Sensor* sensor : sensors_) {
+    for (sensors::Sensor* sensor : sensors) {
         std::cout << "Refreshing..." << std::endl;
-        sensors::TemperatureSensor* current_sensor = dynamic_cast<sensors::TemperatureSensor*>(sensor);
-        std::vector<devices::Device*> devices = FindCorrespondingDevices(current_sensor);
+        std::vector<devices::Device*> corresponding_devices = FindCorrespondingDevices(sensor);
 
-        for (devices::Device* device : devices_) {
-            if (typeid(*device) == typeid(devices::AcUnit)) {
-                devices::AcUnit* ac_unit = dynamic_cast<devices::AcUnit*>(device);
-
-                if (current_sensor->current_temperature() > 28) {
-                    std::cout << "Turning AC unit on..." << std::endl;
-                    ac_unit->set_is_on(true);
-                    std::cout << "Setting fan speed to 50%." << std::endl;
-                    ac_unit->set_fan_speed(100);
-                    std::cout << "Setting desired temperature to 21 degrees." << std::endl;
-                    ac_unit->set_desired_temperature(21);
-                }
-                else if (current_sensor->current_temperature() > 25) {
-                    std::cout << "Turning AC unit on..." << std::endl;
-                    ac_unit->set_is_on(true);
-                    std::cout << "Setting fan speed to 50%." << std::endl;
-                    ac_unit->set_fan_speed(50);
-                    std::cout << "Setting desired temperature to 21 degrees." << std::endl;
-                    ac_unit->set_desired_temperature(21);
-                }
-                else if (ac_unit->is_on()) {
-                    std::cout << "Turning AC unit off..." << std::endl;
-                    ac_unit->set_is_on(false);
-                    std::cout << "Setting fan speed to 0%." << std::endl;
-                    ac_unit->set_fan_speed(0);
-                }
-            }
+        for (devices::Device* device : corresponding_devices) {
+            device->SetOnAuto(sensor);
         }
     }
 }
 
 std::vector<devices::Device*> TemperatureService::FindCorrespondingDevices(sensors::Sensor* sensor) {
-    std::vector<devices::Device*> devices;
+    std::vector<devices::Device*> corresponding_devices;
 
-    for (devices::Device* device : devices_) {
-        if (device->room() == sensor->room()) {
-            devices.push_back(device);
+    for (devices::Device* device : devices) {
+        if (device->GetRoom() == sensor->GetRoom()) {
+            corresponding_devices.push_back(device);
         }
     }
 
-    return devices;
+    return corresponding_devices;
 }
 
 } // namespace services

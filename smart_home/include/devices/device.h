@@ -2,21 +2,30 @@
 #define SMART_HOME_DEVICES_DEVICE_H_
 
 #include "../rooms/room.h"
+#include "../sensors/sensor.h"
 
 namespace devices {
 
-// Rule of Five
+// Rule of Zero
+// Room pointer should be handled separately as it is shared by devices and sensors
 
 class Device {
   public:
-    virtual rooms::Room* room() = 0;
+    Device(rooms::Room* room): room(room) {}
+
+    inline bool GetIsOn() {
+      return is_on;
+    }
+
+    void SetIsOn(bool value);
+
+    virtual rooms::Room* GetRoom() = 0;
+
+    virtual void SetOnAuto(sensors::Sensor* sensor) = 0;
 
   protected:
-    Device(rooms::Room* room): room_(room) {}
-
-    virtual ~Device();
-
-    rooms::Room* room_;
+    bool is_on = false;
+    rooms::Room* room = nullptr;
 };
 
 } // namespace devices
