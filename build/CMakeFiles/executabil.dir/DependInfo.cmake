@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/marius/Desktop/Remote/2023/factorial.cpp" "CMakeFiles/executabil.dir/factorial.cpp.o" "gcc" "CMakeFiles/executabil.dir/factorial.cpp.o.d"
-  "/home/marius/Desktop/Remote/2023/fibbo.cpp" "CMakeFiles/executabil.dir/fibbo.cpp.o" "gcc" "CMakeFiles/executabil.dir/fibbo.cpp.o.d"
+  "/home/marius/Desktop/Remote/2023/Device.cpp" "CMakeFiles/executabil.dir/Device.cpp.o" "gcc" "CMakeFiles/executabil.dir/Device.cpp.o.d"
+  "/home/marius/Desktop/Remote/2023/Room.cpp" "CMakeFiles/executabil.dir/Room.cpp.o" "gcc" "CMakeFiles/executabil.dir/Room.cpp.o.d"
+  "/home/marius/Desktop/Remote/2023/Sensor.cpp" "CMakeFiles/executabil.dir/Sensor.cpp.o" "gcc" "CMakeFiles/executabil.dir/Sensor.cpp.o.d"
   "/home/marius/Desktop/Remote/2023/main.cpp" "CMakeFiles/executabil.dir/main.cpp.o" "gcc" "CMakeFiles/executabil.dir/main.cpp.o.d"
   )
 

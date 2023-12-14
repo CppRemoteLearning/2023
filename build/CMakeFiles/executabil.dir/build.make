@@ -83,49 +83,65 @@ CMakeFiles/executabil.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/main.cpp -o CMakeFiles/executabil.dir/main.cpp.s
 
-CMakeFiles/executabil.dir/factorial.cpp.o: CMakeFiles/executabil.dir/flags.make
-CMakeFiles/executabil.dir/factorial.cpp.o: ../factorial.cpp
-CMakeFiles/executabil.dir/factorial.cpp.o: CMakeFiles/executabil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/executabil.dir/factorial.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/executabil.dir/factorial.cpp.o -MF CMakeFiles/executabil.dir/factorial.cpp.o.d -o CMakeFiles/executabil.dir/factorial.cpp.o -c /home/marius/Desktop/Remote/2023/factorial.cpp
+CMakeFiles/executabil.dir/Device.cpp.o: CMakeFiles/executabil.dir/flags.make
+CMakeFiles/executabil.dir/Device.cpp.o: ../Device.cpp
+CMakeFiles/executabil.dir/Device.cpp.o: CMakeFiles/executabil.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/executabil.dir/Device.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/executabil.dir/Device.cpp.o -MF CMakeFiles/executabil.dir/Device.cpp.o.d -o CMakeFiles/executabil.dir/Device.cpp.o -c /home/marius/Desktop/Remote/2023/Device.cpp
 
-CMakeFiles/executabil.dir/factorial.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/executabil.dir/factorial.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/marius/Desktop/Remote/2023/factorial.cpp > CMakeFiles/executabil.dir/factorial.cpp.i
+CMakeFiles/executabil.dir/Device.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/executabil.dir/Device.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/marius/Desktop/Remote/2023/Device.cpp > CMakeFiles/executabil.dir/Device.cpp.i
 
-CMakeFiles/executabil.dir/factorial.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/factorial.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/factorial.cpp -o CMakeFiles/executabil.dir/factorial.cpp.s
+CMakeFiles/executabil.dir/Device.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/Device.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/Device.cpp -o CMakeFiles/executabil.dir/Device.cpp.s
 
-CMakeFiles/executabil.dir/fibbo.cpp.o: CMakeFiles/executabil.dir/flags.make
-CMakeFiles/executabil.dir/fibbo.cpp.o: ../fibbo.cpp
-CMakeFiles/executabil.dir/fibbo.cpp.o: CMakeFiles/executabil.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/executabil.dir/fibbo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/executabil.dir/fibbo.cpp.o -MF CMakeFiles/executabil.dir/fibbo.cpp.o.d -o CMakeFiles/executabil.dir/fibbo.cpp.o -c /home/marius/Desktop/Remote/2023/fibbo.cpp
+CMakeFiles/executabil.dir/Room.cpp.o: CMakeFiles/executabil.dir/flags.make
+CMakeFiles/executabil.dir/Room.cpp.o: ../Room.cpp
+CMakeFiles/executabil.dir/Room.cpp.o: CMakeFiles/executabil.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/executabil.dir/Room.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/executabil.dir/Room.cpp.o -MF CMakeFiles/executabil.dir/Room.cpp.o.d -o CMakeFiles/executabil.dir/Room.cpp.o -c /home/marius/Desktop/Remote/2023/Room.cpp
 
-CMakeFiles/executabil.dir/fibbo.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/executabil.dir/fibbo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/marius/Desktop/Remote/2023/fibbo.cpp > CMakeFiles/executabil.dir/fibbo.cpp.i
+CMakeFiles/executabil.dir/Room.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/executabil.dir/Room.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/marius/Desktop/Remote/2023/Room.cpp > CMakeFiles/executabil.dir/Room.cpp.i
 
-CMakeFiles/executabil.dir/fibbo.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/fibbo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/fibbo.cpp -o CMakeFiles/executabil.dir/fibbo.cpp.s
+CMakeFiles/executabil.dir/Room.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/Room.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/Room.cpp -o CMakeFiles/executabil.dir/Room.cpp.s
+
+CMakeFiles/executabil.dir/Sensor.cpp.o: CMakeFiles/executabil.dir/flags.make
+CMakeFiles/executabil.dir/Sensor.cpp.o: ../Sensor.cpp
+CMakeFiles/executabil.dir/Sensor.cpp.o: CMakeFiles/executabil.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/executabil.dir/Sensor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/executabil.dir/Sensor.cpp.o -MF CMakeFiles/executabil.dir/Sensor.cpp.o.d -o CMakeFiles/executabil.dir/Sensor.cpp.o -c /home/marius/Desktop/Remote/2023/Sensor.cpp
+
+CMakeFiles/executabil.dir/Sensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/executabil.dir/Sensor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/marius/Desktop/Remote/2023/Sensor.cpp > CMakeFiles/executabil.dir/Sensor.cpp.i
+
+CMakeFiles/executabil.dir/Sensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/executabil.dir/Sensor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/marius/Desktop/Remote/2023/Sensor.cpp -o CMakeFiles/executabil.dir/Sensor.cpp.s
 
 # Object files for target executabil
 executabil_OBJECTS = \
 "CMakeFiles/executabil.dir/main.cpp.o" \
-"CMakeFiles/executabil.dir/factorial.cpp.o" \
-"CMakeFiles/executabil.dir/fibbo.cpp.o"
+"CMakeFiles/executabil.dir/Device.cpp.o" \
+"CMakeFiles/executabil.dir/Room.cpp.o" \
+"CMakeFiles/executabil.dir/Sensor.cpp.o"
 
 # External object files for target executabil
 executabil_EXTERNAL_OBJECTS =
 
 executabil: CMakeFiles/executabil.dir/main.cpp.o
-executabil: CMakeFiles/executabil.dir/factorial.cpp.o
-executabil: CMakeFiles/executabil.dir/fibbo.cpp.o
+executabil: CMakeFiles/executabil.dir/Device.cpp.o
+executabil: CMakeFiles/executabil.dir/Room.cpp.o
+executabil: CMakeFiles/executabil.dir/Sensor.cpp.o
 executabil: CMakeFiles/executabil.dir/build.make
 executabil: CMakeFiles/executabil.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable executabil"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/marius/Desktop/Remote/2023/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable executabil"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/executabil.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

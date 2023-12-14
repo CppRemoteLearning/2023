@@ -1,6 +1,6 @@
 #include "Room.h"
 
-Room::Room(std::vector<Device*> devices, float area,char name[20]):nummberID(this->value++)
+Room::Room(float area = 0,char name[20] = "",std::vector<Device*> devices):nummberID(this->value++)
 {
     for(auto x:devices)
     {
@@ -23,4 +23,8 @@ char* Room::getName(){
 int Room::getID()
 {
     return this->nummberID;
+}
+void Room::addDevice(Device *d)
+{
+    this->devices.push_back(d);
 }

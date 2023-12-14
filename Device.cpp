@@ -1,6 +1,6 @@
 #include "Device.h"
 
-Device::Device(std::set<Sensor*> sensors,bool isWorking, float voltage, char name[20]):nummberID(this->value++)
+Device::Device(bool isWorking = false, float voltage = 0, char name[20] = "",std::set<Sensor*> sensors):nummberID(this->value++)
 {
     for(auto x: sensors)
     {
@@ -10,6 +10,7 @@ Device::Device(std::set<Sensor*> sensors,bool isWorking, float voltage, char nam
     this->voltage =voltage;
     strcpy(this->name,name);
 }
+
 std::set<Sensor*> Device::getSensors()
 {
     return this->sensors;
@@ -29,4 +30,8 @@ char* Device::getName()
 int Device::getID()
 {
     return this->nummberID;
+}
+void Device::addSensor(Sensor *s)
+{
+    this->sensors.insert(s);
 }

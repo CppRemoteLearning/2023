@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/executabil.dir/main.cpp.o CMakeFiles/executabil.dir/factorial.cpp.o CMakeFiles/executabil.dir/fibbo.cpp.o -o executabil 
+/usr/bin/c++ CMakeFiles/executabil.dir/main.cpp.o CMakeFiles/executabil.dir/Device.cpp.o CMakeFiles/executabil.dir/Room.cpp.o CMakeFiles/executabil.dir/Sensor.cpp.o -o executabil 

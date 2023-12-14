@@ -14,11 +14,13 @@ char name[20];
 const int nummberID;
 static int value;
 public:
-Room(std::vector<Device*> devices, float area,char name[20]);
+Room(float area = 0,char name[20] = "",std::vector<Device*> devices);
 std::vector<Device*> getDEvices();
 float getArea();
 char* getName();
 int getID();
+
+void addDevice(Device *d);
 };
 
 #endif

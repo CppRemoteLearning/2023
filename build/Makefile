@@ -129,53 +129,77 @@ executabil/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/build
 .PHONY : executabil/fast
 
-factorial.o: factorial.cpp.o
-.PHONY : factorial.o
+Device.o: Device.cpp.o
+.PHONY : Device.o
 
 # target to build an object file
-factorial.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/factorial.cpp.o
-.PHONY : factorial.cpp.o
+Device.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Device.cpp.o
+.PHONY : Device.cpp.o
 
-factorial.i: factorial.cpp.i
-.PHONY : factorial.i
+Device.i: Device.cpp.i
+.PHONY : Device.i
 
 # target to preprocess a source file
-factorial.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/factorial.cpp.i
-.PHONY : factorial.cpp.i
+Device.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Device.cpp.i
+.PHONY : Device.cpp.i
 
-factorial.s: factorial.cpp.s
-.PHONY : factorial.s
+Device.s: Device.cpp.s
+.PHONY : Device.s
 
 # target to generate assembly for a file
-factorial.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/factorial.cpp.s
-.PHONY : factorial.cpp.s
+Device.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Device.cpp.s
+.PHONY : Device.cpp.s
 
-fibbo.o: fibbo.cpp.o
-.PHONY : fibbo.o
+Room.o: Room.cpp.o
+.PHONY : Room.o
 
 # target to build an object file
-fibbo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/fibbo.cpp.o
-.PHONY : fibbo.cpp.o
+Room.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Room.cpp.o
+.PHONY : Room.cpp.o
 
-fibbo.i: fibbo.cpp.i
-.PHONY : fibbo.i
+Room.i: Room.cpp.i
+.PHONY : Room.i
 
 # target to preprocess a source file
-fibbo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/fibbo.cpp.i
-.PHONY : fibbo.cpp.i
+Room.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Room.cpp.i
+.PHONY : Room.cpp.i
 
-fibbo.s: fibbo.cpp.s
-.PHONY : fibbo.s
+Room.s: Room.cpp.s
+.PHONY : Room.s
 
 # target to generate assembly for a file
-fibbo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/fibbo.cpp.s
-.PHONY : fibbo.cpp.s
+Room.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Room.cpp.s
+.PHONY : Room.cpp.s
+
+Sensor.o: Sensor.cpp.o
+.PHONY : Sensor.o
+
+# target to build an object file
+Sensor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Sensor.cpp.o
+.PHONY : Sensor.cpp.o
+
+Sensor.i: Sensor.cpp.i
+.PHONY : Sensor.i
+
+# target to preprocess a source file
+Sensor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Sensor.cpp.i
+.PHONY : Sensor.cpp.i
+
+Sensor.s: Sensor.cpp.s
+.PHONY : Sensor.s
+
+# target to generate assembly for a file
+Sensor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/executabil.dir/build.make CMakeFiles/executabil.dir/Sensor.cpp.s
+.PHONY : Sensor.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -210,12 +234,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... executabil"
-	@echo "... factorial.o"
-	@echo "... factorial.i"
-	@echo "... factorial.s"
-	@echo "... fibbo.o"
-	@echo "... fibbo.i"
-	@echo "... fibbo.s"
+	@echo "... Device.o"
+	@echo "... Device.i"
+	@echo "... Device.s"
+	@echo "... Room.o"
+	@echo "... Room.i"
+	@echo "... Room.s"
+	@echo "... Sensor.o"
+	@echo "... Sensor.i"
+	@echo "... Sensor.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
