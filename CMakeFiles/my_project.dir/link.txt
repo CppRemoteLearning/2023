@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/my_project.dir/Device.cpp.o CMakeFiles/my_project.dir/FileRepo.cpp.o CMakeFiles/my_project.dir/Room.cpp.o CMakeFiles/my_project.dir/Sensor.cpp.o CMakeFiles/my_project.dir/SmartHomeManager.cpp.o CMakeFiles/my_project.dir/main.cpp.o -o my_project 
