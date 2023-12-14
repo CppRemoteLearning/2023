@@ -1,10 +1,18 @@
 #include "Device.h"
 
-Device::Device(bool isWorking, float voltage, char name[20]):nummberID(this->value++)
+Device::Device(std::set<Sensor*> sensors,bool isWorking, float voltage, char name[20]):nummberID(this->value++)
 {
+    for(auto x: sensors)
+    {
+        this->sensors.insert(x);
+    }
     this->isWorking = isWorking;
     this->voltage =voltage;
     strcpy(this->name,name);
+}
+std::set<Sensor*> Device::getSensors()
+{
+    return this->sensors;
 }
 bool Device::getIsWorking()
 {
