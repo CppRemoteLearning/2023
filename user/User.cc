@@ -6,12 +6,6 @@ namespace SmartHome {
         devices.push_back(new Device(HEATER));
     }
 
-    User::~User() {
-        for (Device *device: devices) {
-            delete device;
-        }
-    }
-
     User::User(const User& other) : userHouse(other.userHouse) {
         devices.reserve(other.devices.size());
         for (Device* device : other.devices) {
@@ -51,6 +45,12 @@ namespace SmartHome {
             }
         }
         return *this;
+    }
+
+    User::~User() {
+        for (Device *device: devices) {
+            delete device;
+        }
     }
 
     void User::controlDevicesDemo() {

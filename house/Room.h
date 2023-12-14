@@ -6,20 +6,17 @@
 
 namespace SmartHome {
     class Room {
+    public:
+        Room();
+        Room(int numSensors, RoomType roomType);
+        RoomType getType() const;
+        const std::vector<Sensor> &getSensors() const;
+        void generateRandomSensorValues();
+
     private:
         RoomType type;
         std::vector<Sensor> sensors;
 
-    public:
-        Room();
-
-        Room(int numSensors, RoomType roomType);
-
-        RoomType getType() const;
-
-        const std::vector<Sensor> &getSensors() const;
-
-        void generateRandomSensorValues();
     };
 }
 
