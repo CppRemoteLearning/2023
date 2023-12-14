@@ -24,8 +24,11 @@ float Sensor::getHumidity()
 {
 return this->humidity;
 }
-
 char* Sensor::getName()
 {
     return this->name;
+}
+int Sensor::getID()
+{
+    return this->nummberID;
 }

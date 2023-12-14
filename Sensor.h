@@ -20,6 +20,7 @@ bool getPresence();
 double getLight();
 float getHumidity();
 char* getName();
+int getID();
 };
 
 #endif
