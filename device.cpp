@@ -1,5 +1,7 @@
 #include "device.h"
 
+namespace smart_home {
+
 Device::Device(const std::string &name, const std::string &type, bool status): name_{name}, type_{type}, status_{status} {}
 
 void Device::SetName(const std::string &name)
@@ -30,4 +32,5 @@ void Device::SetStatus(bool status)
 bool Device::GetStatus()
 {
     return status_;
+}
 }

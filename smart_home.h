@@ -7,6 +7,9 @@
 #include "room.h"
 #include "TinyXml/tinyxml2.h"
 
+namespace smart_home
+{
+
 class SmartHome
 {
 public:
@@ -22,5 +25,6 @@ private:
     std::vector<Room> rooms_;
     
 };
+} // namespace smart_home
 
 #endif

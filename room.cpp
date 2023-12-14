@@ -1,5 +1,8 @@
 #include "room.h"
 
+namespace smart_home
+{
+
 Room::Room(const std::string &name): name_{name} {}
 
 void Room::AddSensor(Sensor &sensor)
@@ -81,3 +84,4 @@ std::vector<Device>& Room::GetDevices()
 {
     return devices_;
 }
+} // namespace smart_home

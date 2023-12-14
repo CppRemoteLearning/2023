@@ -2,6 +2,7 @@
 #define DEVICE_H
 
 #include <string>
+namespace smart_home {
 
 class Device
 {
@@ -23,4 +24,5 @@ private:
     bool status_;
 };
 
+}
 #endif

@@ -1,5 +1,8 @@
 #include "smart_home.h"
 
+namespace smart_home
+{
+
 void SmartHome::GetDataFromXml(const char* filename) {
     tinyxml2::XMLDocument xmlDoc;
     tinyxml2::XMLError err = xmlDoc.LoadFile(filename);
@@ -109,3 +112,5 @@ Device& SmartHome::getDeviceFromXml(tinyxml2::XMLElement* deviceElement)
     
     return *device;
 }
+
+} // namespace smart_home

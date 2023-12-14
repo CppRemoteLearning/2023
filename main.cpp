@@ -5,21 +5,21 @@
 
 int main()
 {
-    SmartHome smartHome;
+    smart_home::SmartHome smartHome;
     try
     {
         smartHome.GetDataFromXml("../data.xml");
         
-        //Device device("BathroomDoor", "Door", true);
-        //Sensor presence("PresenceSensor", "Presence", 0);
+        //smart_home::Device device("BathroomDoor", "Door", true);
+        //smart_home::Sensor presence("PresenceSensor", "Presence", 0);
         
-        // Room *living = smartHome.GetRoom("LivingRoom");
+        // smart_home::Room *living = smartHome.GetRoom("LivingRoom");
         // living->AddSensor(presence);
         // living->AddDevice(device);
 
         //smartHome.GetRoom("LivingRoom")->DeleteSensor("PresenceSensor");
 
-        Sensor *lightSensor = smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor");
+        smart_home::Sensor *lightSensor = smartHome.GetRoom("LivingRoom")->GetSensor("LightSensor");
         if (lightSensor != nullptr)
         {
             float val = lightSensor->GetValue();

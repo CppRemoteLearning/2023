@@ -3,6 +3,9 @@
 
 #include <string>
 
+namespace smart_home
+{
+
 class Sensor
 {
 public:
@@ -21,5 +24,7 @@ private:
     std::string type_;
     float value_;
 };
+
+} // namespace smart_home
 
 #endif

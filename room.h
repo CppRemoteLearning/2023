@@ -6,6 +6,8 @@
 #include "sensor.h"
 #include "device.h"
 
+namespace smart_home {
+
 class Room
 {
 public:
@@ -33,5 +35,5 @@ private:
     // I choosed vector because it's enough for what I need
     // List could be a good option too  
 };
-
+}
 #endif
