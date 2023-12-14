@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Executabil.dir/main.cpp.o CMakeFiles/Executabil.dir/factorial.cpp.o CMakeFiles/Executabil.dir/fibbo.cpp.o -o Executabil 
