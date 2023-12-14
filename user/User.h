@@ -9,23 +9,23 @@
 
 namespace SmartHome {
     class User {
-    private:
-        std::vector<Device *> devices;
-        SmartHome::House userHouse;
-
     public:
         User(int numRooms, int numSensorsPerRoom);
-        ~User();
         User(const User& other);
-        User& operator=(const User& other);
         User(User&& other);
+        User& operator=(const User& other);
         User& operator=(User&& other);
+        ~User();
         void readSensorDataFromRoom(RoomType roomType);
         void readSensorDataFromRoomDemo();
         void controlDevicesDemo();
         void getDevicesStatus();
         House getUserHouse() const;
         void setUserHouse(const House &house);
+    private:
+        std::vector<Device *> devices;
+        SmartHome::House userHouse;
+
     };
 }
 
