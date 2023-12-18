@@ -17,9 +17,11 @@ class Device {
       return is_on;
     }
 
-    void SetIsOn(bool value);
+    virtual void SetIsOn(bool value);
 
-    virtual rooms::Room* GetRoom() = 0;
+    inline rooms::Room* GetRoom() {
+      return room;
+    }
 
     virtual void SetOnAuto(sensors::Sensor* sensor) = 0;
 

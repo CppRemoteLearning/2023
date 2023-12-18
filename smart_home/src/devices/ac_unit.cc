@@ -3,13 +3,23 @@
 
 namespace devices {
 
-void AcUnit::SetFanSpeed(int value) {
+void AcUnit::SetIsOn(bool value) {
+    if (is_on != value) {
+        std::cout << "Turning AC unit " << (value ? "on" : "off") << "..." << std::endl;
+        is_on = value;
+    }
+    else {
+        std::cout << "AC unit already turned " << (value ? "on" : "off") << "." << std::endl;
+    }
+}
+
+void AcUnit::SetFanSpeed(unsigned char value) {
     if (fan_speed != value) {
-        std::cout << "Setting fan speed to " << value << "%." << std::endl;
+        std::cout << "Setting fan speed to " << (int)value << "%." << std::endl;
         fan_speed = value;
     }
     else {
-        std::cout << "Fan speed already set to " << value << "%." << std::endl;
+        std::cout << "Fan speed already set to " << (int)value << "%." << std::endl;
     }
 }
 
@@ -27,17 +37,17 @@ void AcUnit::SetOnAuto(sensors::Sensor* sensor) {
 
     if (std::any_cast<float>(sensor->GetData()) > 28) {
         SetIsOn(true);
-        SetFanSpeed(100);
+        SetFanSpeed((unsigned char)100);
         SetDesiredTemperature(21);
     }
     else if (std::any_cast<float>(sensor->GetData()) > 25) {
         SetIsOn(true);
-        SetFanSpeed(50);
+        SetFanSpeed((unsigned char)50);
         SetDesiredTemperature(21);
     }
     else if (is_on) {
         SetIsOn(false);
-        SetFanSpeed(0);
+        SetFanSpeed((unsigned char)0);
     }
 }   
 

@@ -2,6 +2,7 @@
 #define SMART_HOME_SERVICES_SERVICE_H_
 
 #include <vector>
+#include <map>
 #include "../sensors/sensor.h"
 #include "../devices/device.h"
 
@@ -11,13 +12,20 @@ namespace services {
 
 class Service {
     public:
-      virtual std::vector<sensors::Sensor*> GetSensors() = 0;
-      
-      virtual std::vector<devices::Device*> GetDevices() = 0;
+      std::vector<sensors::Sensor*> GetSensors();
+
+      std::vector<devices::Device*> GetDevices();
+
+      void AddSensor(sensors::Sensor* sensor);
+
+      void AddDevice(devices::Device* device);
+
+      virtual void Refresh() = 0;
 
     protected:
-      std::vector<sensors::Sensor*> sensors;
-      std::vector<devices::Device*> devices;
+      std::map<sensors::Sensor*, std::vector<devices::Device*>> sensor_devices;
+
+      void SetDevicesOnAuto();
 };
 
 } // namespace services

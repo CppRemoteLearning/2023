@@ -12,15 +12,13 @@ class AcUnit : public Device {
   public:
     AcUnit(rooms::Room* room): Device(room) {}
 
-    rooms::Room* GetRoom() override {
-        return room;
-    }
+    void SetIsOn(bool value) override;
 
-    inline int GetFanSpeed() {
+    inline unsigned char GetFanSpeed() {
         return fan_speed;
     }
 
-    void SetFanSpeed(int value);
+    void SetFanSpeed(unsigned char value);
 
     inline float GetDesiredTemperature() {
         return desired_temperature;
