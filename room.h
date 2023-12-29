@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "sensor.h"
+#include "Sensor/sensor.h"
 #include "device.h"
 
 namespace smart_home {
