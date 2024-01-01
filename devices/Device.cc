@@ -40,9 +40,4 @@ namespace SmartHome {
         std::cout << "Turning off " << getDeviceType() << std::endl;
         status = 0;
     }
-
-    void Device::displayStatuses() const {
-        std::cout << "Device Type: " << getDeviceType() << std::endl;
-        std::cout << "Device Status: " << getDeviceStatus() << std::endl;
-    }
 }

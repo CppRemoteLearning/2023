@@ -1,27 +1,33 @@
 #include "Room.h"
 
 namespace SmartHome {
-    Room::Room() : type(LIVING_ROOM) {
-        sensors.reserve(0);
-    }
+    Room::Room() : type(LIVING_ROOM) {}
 
-    Room::Room(int numSensors, RoomType roomType) : type(roomType) {
-        sensors.reserve(numSensors);
-        sensors.emplace_back("Temperature", CELSIUS);
-        sensors.emplace_back("Humidity", PERCENT);
-    }
+    Room::Room(RoomType roomType) : type(roomType) {}
 
     RoomType Room::getType() const {
         return type;
     }
 
-    const std::vector<Sensor> &Room::getSensors() const {
-        return sensors;
+    void Room::addTemperatureSensor(const std::string& name) {
+        sensors.emplace_back(std::make_unique<TemperatureSensor>(name));
+    }
+
+    void Room::addHumiditySensor(const std::string& name) {
+        sensors.emplace_back(std::make_unique<HumiditySensor>(name));
+    }
+
+    void Room::addMonoxideSensor(const std::string& name) {
+        sensors.emplace_back(std::make_unique<MonoxideSensor>(name));
     }
 
     void Room::generateRandomSensorValues() {
-        for (Sensor &sensor: sensors) {
-            sensor.generateRandomValue();
+        for (auto& sensor : sensors) {
+            sensor->generateRandomValue();
         }
+    }
+
+    const std::vector<std::unique_ptr<Sensor>>& Room::getSensors() const {
+        return sensors;
     }
 }
