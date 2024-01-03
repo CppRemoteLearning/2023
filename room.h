@@ -14,13 +14,11 @@ class Room
 public:
     Room(const std::string &name = "");
 
-    void AddSensor(Sensor &sensor);
+    void AddSensor(std::unique_ptr<Sensor> &sensor);
     void DeleteSensor(const std::string &name);
-    std::shared_ptr<Sensor> GetSensor(const std::string &name);
 
-    void AddDevice(Device &device);
+    void AddDevice(std::unique_ptr<Device> &device);
     void DeleteDevice(const std::string &name);
-    std::shared_ptr<Sensor> GetDevice(const std::string &name);
 
     std::string& GetName();
     void SetName(const std::string &name);

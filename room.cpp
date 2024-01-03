@@ -5,10 +5,10 @@ namespace smart_home
 
 Room::Room(const std::string &name): name_{name} {}
 
-// void Room::AddSensor(Sensor &sensor)
-// {
-//     sensors_.push_back(std::make_unique<Sensor>(sensor));
-// }
+void Room::AddSensor(std::unique_ptr<Sensor> &sensor)
+{
+    sensors_.emplace_back(std::move(sensor));
+}
 
 void Room::DeleteSensor(const std::string &name)
 {
@@ -23,23 +23,10 @@ void Room::DeleteSensor(const std::string &name)
     }
 }
 
-// std::shared_ptr<Sensor> Room::GetSensor(const std::string &name)
-// {
-//     for (auto &sensor : sensors_)
-//     {
-//         if (sensor->GetName() == name)
-//         {
-//             return std::make_shared<sensor>;
-//         }
-//     }
-
-//     return nullptr;
-// }
-
-// void Room::AddDevice(Device &device)
-// {
-//     devices_.push_back(std::make_unique<Device>(device));
-// }
+void Room::AddDevice(std::unique_ptr<Device> &device)
+{
+    devices_.emplace_back(std::move(device));
+}
 
 void Room::DeleteDevice(const std::string &name)
 {
@@ -52,18 +39,6 @@ void Room::DeleteDevice(const std::string &name)
         }
     }
 }
-
-// std::shared_ptr<Device> Room::GetDevice(const std::string &name)
-// {
-//     for (auto &device : devices_)
-//     {
-//         if (device->GetName() == name)
-//         {
-//             return std::make_shared<Device>(device);
-//         }
-//     }
-//     return nullptr;
-// }
 
 std::string& Room::GetName()
 {
