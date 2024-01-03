@@ -11,6 +11,12 @@ namespace SmartHome {
         devices.push_back(new AirConditioner());
     }
 
+    User::~User() {
+        for (auto device : devices) {
+            delete device;
+        }
+    }
+
     void User::controlDevicesDemo() {
         while (true) {
             std::cout << "Enter a device type (0 = Light, 1 = Heater, 2 = AirConditioner): ";

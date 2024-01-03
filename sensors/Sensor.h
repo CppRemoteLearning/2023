@@ -21,7 +21,7 @@ namespace SmartHome {
 
     protected:
         std::string name;
-        int *value;
+        double *value;
         MeasureUnit unit;
     };
 }

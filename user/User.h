@@ -11,6 +11,7 @@ namespace SmartHome {
     class User {
     public:
         explicit User(int numRooms);
+        ~User();
         void readSensorDataFromRoomDemo();
         void controlDevicesDemo();
         void getDevicesStatus();
