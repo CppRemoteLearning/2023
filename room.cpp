@@ -8,6 +8,7 @@ Room::Room(const std::string &name): name_{name} {}
 void Room::AddSensor(std::unique_ptr<Sensor> &sensor)
 {
     sensors_.emplace_back(std::move(sensor));
+
 }
 
 void Room::DeleteSensor(const std::string &name)
@@ -39,6 +40,7 @@ void Room::DeleteDevice(const std::string &name)
         }
     }
 }
+
 
 std::string& Room::GetName()
 {

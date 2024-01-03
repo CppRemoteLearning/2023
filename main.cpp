@@ -42,6 +42,7 @@ int main()
 
         smart_home::SmartHomeStatus::PrintSensorsStatus(obj);
 
+
     }
     catch(const std::invalid_argument& e)
     {

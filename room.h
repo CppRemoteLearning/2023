@@ -26,7 +26,6 @@ public:
     std::vector<std::unique_ptr<Sensor>>& GetSensors();
     std::vector<std::unique_ptr<Device>>& GetDevices();
 
-
 private:
     std::string name_;
     std::vector<std::unique_ptr<Sensor>> sensors_;
