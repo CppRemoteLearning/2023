@@ -13,7 +13,9 @@ public:
     float GetTemperature();
     void SetTemperature(float temperature);
 
-    bool ActionNeeded();
+    Action ActionNeeded() override;
+    const std::string Status() override;
+
 private:
     float temperature_;
 };

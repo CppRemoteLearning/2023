@@ -10,6 +10,17 @@ enum class DeviceStatus{
     kOutOfOrder,
 };
 
+inline const char* DeviceStatusToString(DeviceStatus v)
+{
+    switch (v)
+    {
+        case (smart_home::DeviceStatus::kOff):   return "Off";
+        case (smart_home::DeviceStatus::kOn):   return "On";
+        case (smart_home::DeviceStatus::kOutOfOrder): return "OutOfOrder";
+        default:    return "[Unknown type]";
+    }
+}
+
 } // namespace smart_home
 
 #endif

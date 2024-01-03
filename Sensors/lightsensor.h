@@ -13,7 +13,8 @@ public:
     float GetIntensity();
     void SetIntensity(float intensity);
 
-    bool ActionNeeded();
+    Action ActionNeeded() override;
+    const std::string Status() override;
 
 private:
     float intensity_;

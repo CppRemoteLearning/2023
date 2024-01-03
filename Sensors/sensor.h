@@ -3,18 +3,29 @@
 
 #include <string>
 
+#include "action.h"
+#include "../statusobject.h"
+
 namespace smart_home
 {
 
-class Sensor
+class Sensor : public StatusObject
 {
 public:
     Sensor(const std::string &name = "");
+
+    Sensor(const Sensor &sensor);
+    Sensor& operator = (const Sensor &sensor); 
+    
+    Sensor(Sensor &&sensor);
+    Sensor& operator = (Sensor &&sensor); 
+
     std::string& GetName();
     void SetName(const std::string &name);
 
-    virtual bool ActionNeeded() = 0;
-
+    virtual Action ActionNeeded() = 0;
+    const std::string Status() = 0;
+    
     virtual ~Sensor() = default;
 
 private:

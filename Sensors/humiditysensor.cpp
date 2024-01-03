@@ -15,14 +15,19 @@ void HumiditySensor::SetHumidity(float humidity)
     humidity_ = humidity;
 }
 
-bool HumiditySensor::ActionNeeded()
+Action HumiditySensor::ActionNeeded()
 {
     if (humidity_ >= 600)
     {
-        return true;
+        return Action::kTooMuchHumidity;
     }
     
-    return false;
+    return Action::kNone;
 }
-    
+
+const std::string HumiditySensor::Status()
+{
+    return GetName() + ": Humidity is " + std::to_string(humidity_);
+}
+
 } // namespace smart_home

@@ -9,10 +9,10 @@ namespace smart_home
 class LightBulb : public Device
 {
 public:
-    LightBulb(const std::string &name = "", DeviceStatus status = DeviceStatus::kOff);
-
+    LightBulb(const std::string &name = "", DeviceStatus status = DeviceStatus::kOff, std::string Color = "white");
+    const std::string Status() override;
 private:
-
+    std::string color_;
 };
 
 } // namespace smart_home

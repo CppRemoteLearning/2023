@@ -13,7 +13,8 @@ public:
     float GetHumidity();
     void SetHumidity(float humidity);
 
-    bool ActionNeeded();
+    Action ActionNeeded() override;
+    const std::string Status() override;
 
 private:
     float humidity_;

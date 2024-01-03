@@ -15,13 +15,24 @@ void TemperatureSensor::SetTemperature(float temperature)
     temperature_ = temperature;
 } 
 
-bool TemperatureSensor::ActionNeeded() 
+Action TemperatureSensor::ActionNeeded() 
 {
     if (temperature_ >= 28)
     {
-        return true;
+        return Action::kLowerTheTemperature;
     }
-    return false;
-}
     
+    if (temperature_ <= 19)
+    {
+        return Action::kRaiseTheTemperature;
+    }
+    
+    return Action::kNone;
+}
+
+const std::string TemperatureSensor::Status()
+{
+    return GetName() + ": Temperature is " + std::to_string(temperature_);
+}
+
 } // namespace smart_home

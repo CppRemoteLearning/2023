@@ -15,15 +15,18 @@ void LightSensor::SetIntensity(float intensity)
     intensity_ = intensity;
 }
 
-bool LightSensor::ActionNeeded()
+Action LightSensor::ActionNeeded()
 {
     if (intensity_ <= 200)
     {
-        return true;
+        return Action::kNeedMoreLight;
     }
-    return false;
+    return Action::kNone;
 }
 
+const std::string LightSensor::Status()
+{
+    return GetName() + ": The intensity of light is " + std::to_string(intensity_);
+}
 
-    
 } // namespace smart_home

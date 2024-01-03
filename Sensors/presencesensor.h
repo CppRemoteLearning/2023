@@ -14,8 +14,8 @@ public:
     bool GetIsPresence(); 
     void SetIsPresence(bool is_presence);
 
-    bool ActionNeeded();
-    
+    Action ActionNeeded() override;
+    const std::string Status() override;
 private:
     bool is_presence_;
     
