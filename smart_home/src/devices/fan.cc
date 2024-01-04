@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/devices/fan.h"
+#include "devices/fan.h"
 
 namespace devices {
 
@@ -13,13 +13,13 @@ void Fan::SetIsOn(bool value) {
     }
 }
 
-void Fan::SetSpeed(unsigned char value) {
+void Fan::SetSpeed(uint8_t value) {
     if (speed != value) {
-        std::cout << "Setting speed to " << (int)value << "%." << std::endl;
+        std::cout << "Setting speed to " << +value << "%." << std::endl;
         speed = value;
     }
     else {
-        std::cout << "Speed already set to " << (int)value << "%." << std::endl;
+        std::cout << "Speed already set to " << +value << "%." << std::endl;
     }
 }
 
@@ -37,17 +37,17 @@ void Fan::SetOnAuto(sensors::Sensor* sensor) {
 
     if (std::any_cast<float>(sensor->GetData()) > 28) {
         SetIsOn(true);
-        SetSpeed((unsigned char)100);
+        SetSpeed((uint8_t)100);
         SetIsRotating(true);
     }
     else if (std::any_cast<float>(sensor->GetData()) > 25) {
         SetIsOn(true);
-        SetSpeed((unsigned char)50);
+        SetSpeed((uint8_t)50);
         SetIsRotating(false);
     }
     else if (is_on) {
         SetIsOn(false);
-        SetSpeed((unsigned char)0);
+        SetSpeed((uint8_t)0);
         SetIsRotating(false);
     }
 }   

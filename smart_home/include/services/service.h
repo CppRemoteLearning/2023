@@ -2,9 +2,9 @@
 #define SMART_HOME_SERVICES_SERVICE_H_
 
 #include <vector>
-#include <map>
-#include "../sensors/sensor.h"
-#include "../devices/device.h"
+#include <unordered_map>
+#include "sensors/sensor.h"
+#include "devices/device.h"
 
 namespace services {
 
@@ -23,7 +23,7 @@ class Service {
       virtual void Refresh() = 0;
 
     protected:
-      std::map<sensors::Sensor*, std::vector<devices::Device*>> sensor_devices;
+      std::unordered_map<sensors::Sensor*, std::vector<devices::Device*>> sensor_devices;
 
       void SetDevicesOnAuto();
 };

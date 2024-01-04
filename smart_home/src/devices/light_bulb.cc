@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/devices/light_bulb.h"
+#include "devices/light_bulb.h"
 
 namespace devices {
 

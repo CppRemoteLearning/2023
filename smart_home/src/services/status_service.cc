@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../../include/services/status_service.h"
-#include "../../include/sensors/temperature_sensor.h"
-#include "../../include/sensors/presence_sensor.h"
-#include "../../include/sensors/light_sensor.h"
-#include "../../include/devices/device.h"
+#include "services/status_service.h"
+#include "sensors/temperature_sensor.h"
+#include "sensors/presence_sensor.h"
+#include "sensors/light_sensor.h"
+#include "devices/device.h"
 
 namespace services {
 

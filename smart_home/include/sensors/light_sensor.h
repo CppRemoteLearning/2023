@@ -16,11 +16,11 @@ class LightSensor : public Sensor {
     }
 
     inline void SetData(const std::any &data) override {
-        light_level = std::any_cast<unsigned char>(data);
+        light_level = std::any_cast<uint8_t>(data);
     }
 
   private:
-    unsigned char light_level = 100;
+    uint8_t light_level = 100;
 };
 
 } // namespace sensors

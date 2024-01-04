@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/services/light_service.h"
+#include "services/light_service.h"
 
 namespace services {
 

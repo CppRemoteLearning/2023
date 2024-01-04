@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/devices/device.h"
+#include "devices/device.h"
 
 namespace devices
 {

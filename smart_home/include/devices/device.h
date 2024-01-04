@@ -1,8 +1,8 @@
 #ifndef SMART_HOME_DEVICES_DEVICE_H_
 #define SMART_HOME_DEVICES_DEVICE_H_
 
-#include "../rooms/room.h"
-#include "../sensors/sensor.h"
+#include "rooms/room.h"
+#include "sensors/sensor.h"
 
 namespace devices {
 

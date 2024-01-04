@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/services/temperature_service.h"
+#include "services/temperature_service.h"
 
 namespace services {
 

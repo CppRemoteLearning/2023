@@ -2,8 +2,8 @@
 #define SMART_HOME_SERVICES_STATUS_SERVICE_H_
 
 #include <vector>
-#include "../sensors/sensor.h"
-#include "../devices/device.h"
+#include "sensors/sensor.h"
+#include "devices/device.h"
 
 namespace services {
 

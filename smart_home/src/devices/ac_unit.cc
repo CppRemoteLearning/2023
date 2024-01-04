@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../../include/devices/ac_unit.h"
+#include "devices/ac_unit.h"
 
 namespace devices {
 
@@ -13,13 +13,13 @@ void AcUnit::SetIsOn(bool value) {
     }
 }
 
-void AcUnit::SetFanSpeed(unsigned char value) {
+void AcUnit::SetFanSpeed(uint8_t value) {
     if (fan_speed != value) {
-        std::cout << "Setting fan speed to " << (int)value << "%." << std::endl;
+        std::cout << "Setting fan speed to " << +value << "%." << std::endl;
         fan_speed = value;
     }
     else {
-        std::cout << "Fan speed already set to " << (int)value << "%." << std::endl;
+        std::cout << "Fan speed already set to " << +value << "%." << std::endl;
     }
 }
 
@@ -37,17 +37,17 @@ void AcUnit::SetOnAuto(sensors::Sensor* sensor) {
 
     if (std::any_cast<float>(sensor->GetData()) > 28) {
         SetIsOn(true);
-        SetFanSpeed((unsigned char)100);
+        SetFanSpeed((uint8_t)100);
         SetDesiredTemperature(21);
     }
     else if (std::any_cast<float>(sensor->GetData()) > 25) {
         SetIsOn(true);
-        SetFanSpeed((unsigned char)50);
+        SetFanSpeed((uint8_t)50);
         SetDesiredTemperature(21);
     }
     else if (is_on) {
         SetIsOn(false);
-        SetFanSpeed((unsigned char)0);
+        SetFanSpeed((uint8_t)0);
     }
 }   
 

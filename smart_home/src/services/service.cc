@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../../include/services/service.h"
-#include "../../include/sensors/sensor.h"
-#include "../../include/devices/device.h"
+#include "services/service.h"
+#include "sensors/sensor.h"
+#include "devices/device.h"
 
 namespace services {
 

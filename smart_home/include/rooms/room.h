@@ -13,23 +13,11 @@ class Room {
 
     Room(const Room& other) : name(other.name), size(other.size) {}
 
-    Room& operator=(const Room& other) {
-      if (this != &other) {
-        name = other.name;
-        size = other.size;
-      }
-      return *this;
-    }
+    Room& operator=(const Room& other);
 
     Room(const Room&& other) : name(std::move(other.name)), size(other.size) {}
 
-    Room& operator=(Room&& other) {
-      if (this != &other) {
-        name = std::move(other.name);
-        size = other.size;
-      }
-      return *this;
-    }
+    Room& operator=(Room&& other);
 
     ~Room() = default;
 

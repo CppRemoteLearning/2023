@@ -1,13 +1,13 @@
 #include <iostream>
-#include "../include/sensors/temperature_sensor.h"
-#include "../include/sensors/presence_sensor.h"
-#include "../include/services/temperature_service.h"
-#include "../include/services/presence_service.h"
-#include "../include/services/status_service.h"
-#include "../include/devices/ac_unit.h"
-#include "../include/devices/fan.h"
-#include "../include/devices/light_bulb.h"
-#include "../include/tiny_xml/tinyxml2.h"
+#include "sensors/temperature_sensor.h"
+#include "sensors/presence_sensor.h"
+#include "services/temperature_service.h"
+#include "services/presence_service.h"
+#include "services/status_service.h"
+#include "devices/ac_unit.h"
+#include "devices/fan.h"
+#include "devices/light_bulb.h"
+#include "tinyxml2.h"
 
 int main() {
 

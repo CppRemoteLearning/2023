@@ -2,7 +2,7 @@
 #define SMART_HOME_SENSORS_SENSOR_H_
 
 #include <any>
-#include "../rooms/room.h"
+#include "rooms/room.h"
 
 namespace sensors {
 

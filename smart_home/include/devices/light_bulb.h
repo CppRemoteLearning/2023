@@ -1,7 +1,7 @@
 #ifndef SMART_HOME_DEVICES_LIGHT_BULB_H_
 #define SMART_HOME_DEVICES_LIGHT_BULB_H_
 
-#include "../rooms/room.h"
+#include "rooms/room.h"
 #include "device.h"
 
 namespace devices {
