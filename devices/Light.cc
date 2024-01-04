@@ -14,4 +14,9 @@ namespace SmartHome {
     void Light::displayStatuses() const {
         std::cout << "Light status: " << getDeviceStatus() << ", Brightness: " << brightness << std::endl;
     }
+
+     Light* Light::clone() const {
+        return new Light(*this);
+    }
+    
 }

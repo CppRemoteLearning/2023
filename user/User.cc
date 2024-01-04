@@ -5,7 +5,7 @@
 #include "../devices/Light.h"
 
 namespace SmartHome {
-    User::User(int numRooms) : userHouse(numRooms) {
+     User::User(int numRooms) : userHouse(numRooms) {
         devices.push_back(new Light());
         devices.push_back(new Heater());
         devices.push_back(new AirConditioner());
@@ -15,6 +15,55 @@ namespace SmartHome {
         for (auto device : devices) {
             delete device;
         }
+    }
+
+    User::User(const User& other) : userHouse(other.userHouse) {
+        copyDevices(other);
+    }
+
+    User::User(User&& other) noexcept : userHouse(std::move(other.userHouse)) {
+        moveDevices(other);
+    }
+
+    User& User::operator=(const User& other) {
+        if (this != &other) {
+            for (auto device : devices) {
+                delete device;
+            }
+            devices.clear();
+
+            userHouse = other.userHouse;
+
+            copyDevices(other);
+        }
+        return *this;
+    }
+
+    User& User::operator=(User&& other) noexcept {
+        if (this != &other) {
+            for (auto device : devices) {
+                delete device;
+            }
+            devices.clear();
+
+            userHouse = std::move(other.userHouse);
+
+            moveDevices(other);
+        }
+        return *this;
+    }
+
+
+    void User::copyDevices(const User& other) {
+        for (auto device : other.devices) {
+            devices.push_back(device->clone());
+        }
+    }
+
+    // Utility function for clearing and moving devices
+    void User::moveDevices(User& other) {
+        devices = std::move(other.devices);
+        other.devices.clear();
     }
 
     void User::controlDevicesDemo() {

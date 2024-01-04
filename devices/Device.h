@@ -16,6 +16,7 @@ namespace SmartHome {
         void turnOn();
         void turnOff();
         virtual void displayStatuses() const = 0;
+        virtual Device* clone() const = 0;
     private:
         int status = 0;
         DeviceType type;

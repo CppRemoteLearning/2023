@@ -23,4 +23,8 @@ namespace SmartHome {
         std::string modeStr = mode == ACMode::COOLING ? "Cooling" : "Heating";
         std::cout << "Air Conditioner status: " << getDeviceStatus() << ", Mode: " << modeStr << ", Temperature: " << temperature << std::endl;
     }
+
+     AirConditioner* AirConditioner::clone() const {
+        return new AirConditioner(*this);
+    }
 }

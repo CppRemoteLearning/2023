@@ -10,7 +10,7 @@ namespace SmartHome {
         void setBrightness(int brightness);
         int getBrightness() const;
         void displayStatuses() const override;
-
+     Light* clone() const override;
     private:
         int brightness;
     };

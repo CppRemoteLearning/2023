@@ -14,4 +14,8 @@ namespace SmartHome {
     void Heater::displayStatuses() const {
         std::cout << "Heater status: " << getDeviceStatus() << ", Temperature: " << temperature << std::endl;
     }
+
+     Heater* Heater::clone() const {
+        return new Heater(*this);
+    }
 }

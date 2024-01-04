@@ -14,6 +14,7 @@ namespace SmartHome {
         int getTemperature() const;
         ACMode getMode() const;
         void displayStatuses() const override;
+        AirConditioner* clone() const override;
 
     private:
         int temperature;

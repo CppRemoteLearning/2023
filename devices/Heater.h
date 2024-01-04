@@ -10,7 +10,7 @@ namespace SmartHome {
         void setTemperature(int temperature);
         int getTemperature() const;
         void displayStatuses() const override;
-
+        Heater* clone() const override;
     private:
         int temperature;
     };

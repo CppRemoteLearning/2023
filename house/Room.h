@@ -14,8 +14,8 @@ namespace SmartHome {
     public:
         Room();
         explicit Room(RoomType roomType);
-        Room(const Room&) = delete;
-        Room& operator=(const Room&) = delete;
+        Room(const Room&) = default;
+        Room& operator=(const Room&) = default;
         Room(Room&&) noexcept = default;
         Room& operator=(Room&&) noexcept = default;
         RoomType getType() const;
