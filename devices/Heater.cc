@@ -1,6 +1,6 @@
 #include "Heater.h"
 
-namespace SmartHome {
+namespace smart_home {
     Heater::Heater() : Device(DeviceType::HEATER), temperature(0) {}
 
     void Heater::setTemperature(int temperature) {

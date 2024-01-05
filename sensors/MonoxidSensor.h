@@ -2,7 +2,7 @@
 #define NAGARROREMOTELEARNING_MONOXIDSENSOR_H
 #include "Sensor.h"
 
-namespace SmartHome {
+namespace smart_home {
     class MonoxideSensor : public Sensor {
     public:
         MonoxideSensor(const std::string &name);

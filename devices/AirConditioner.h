@@ -3,7 +3,7 @@
 
 #include "Device.h"
 
-namespace SmartHome {
+namespace smart_home {
     enum class ACMode { COOLING, HEATING };
 
     class AirConditioner : public Device {

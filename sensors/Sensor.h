@@ -4,7 +4,7 @@
 #include <string>
 #include "../utils/enums.h"
 
-namespace SmartHome {
+namespace smart_home {
     class Sensor {
     public:
         Sensor(const std::string &sensorName, MeasureUnit sensorUnit);

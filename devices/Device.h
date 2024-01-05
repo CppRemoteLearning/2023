@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../utils/enums.h"
 
-namespace SmartHome {
+namespace smart_home {
     class Device {
     public:
         explicit Device(DeviceType deviceType);

@@ -1,7 +1,7 @@
 #include "TemperatureSensor.h"
 #include <cstdlib>
 
-namespace SmartHome {
+namespace smart_home {
     TemperatureSensor::TemperatureSensor(const std::string &name)
             : Sensor(name, MeasureUnit::CELSIUS) {}
 

@@ -3,7 +3,7 @@
 
 #include "Device.h"
 
-namespace SmartHome {
+namespace smart_home {
     class Heater : public Device {
     public:
         Heater();

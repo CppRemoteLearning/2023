@@ -1,6 +1,6 @@
 #include "AirConditioner.h"
 
-namespace SmartHome {
+namespace smart_home {
     AirConditioner::AirConditioner() : Device(DeviceType::AIR_CONDITIONER), temperature(0), mode(ACMode::COOLING) {}
 
     void AirConditioner::setTemperature(int temperature) {

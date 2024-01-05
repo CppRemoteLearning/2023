@@ -5,7 +5,7 @@
 #include "../devices/Device.h"
 #include "../sensors/Sensor.h"
 
-namespace SmartHome {
+namespace smart_home {
     class StatusPrinter {
     public:
         static void printDeviceStatus(const std::vector<Device*> &devices);

@@ -1,7 +1,7 @@
 #include "MonoxidSensor.h"
 #include <cstdlib>
 
-namespace SmartHome {
+namespace smart_home {
     MonoxideSensor::MonoxideSensor(const std::string &name)
             : Sensor(name, MeasureUnit::UNKNOWN) {}
 

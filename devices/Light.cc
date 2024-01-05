@@ -1,6 +1,6 @@
 #include "Light.h"
 
-namespace SmartHome {
+namespace smart_home {
     Light::Light() : Device(DeviceType::LIGHT), brightness(0) {}
 
     void Light::setBrightness(int brightness) {

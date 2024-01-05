@@ -1,7 +1,7 @@
 #include "Sensor.h"
 #include <cstdlib>
 
-namespace SmartHome {
+namespace smart_home {
     Sensor::Sensor(const std::string &sensorName, MeasureUnit sensorUnit)
             : name(sensorName), value(new double(0)), unit(sensorUnit) {}
 

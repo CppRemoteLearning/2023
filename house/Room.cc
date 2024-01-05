@@ -1,6 +1,6 @@
 #include "Room.h"
 
-namespace SmartHome {
+namespace smart_home {
     Room::Room() : type(LIVING_ROOM) {}
 
     Room::Room(RoomType roomType) : type(roomType) {}
@@ -10,15 +10,15 @@ namespace SmartHome {
     }
 
     void Room::addTemperatureSensor(const std::string& name) {
-        sensors.emplace_back(std::make_unique<TemperatureSensor>(name));
+        sensors.emplace_back(std::make_shared<TemperatureSensor>(name));
     }
 
     void Room::addHumiditySensor(const std::string& name) {
-        sensors.emplace_back(std::make_unique<HumiditySensor>(name));
+        sensors.emplace_back(std::make_shared<HumiditySensor>(name));
     }
 
     void Room::addMonoxideSensor(const std::string& name) {
-        sensors.emplace_back(std::make_unique<MonoxideSensor>(name));
+        sensors.emplace_back(std::make_shared<MonoxideSensor>(name));
     }
 
     void Room::generateRandomSensorValues() {
@@ -27,7 +27,7 @@ namespace SmartHome {
         }
     }
 
-    const std::vector<std::unique_ptr<Sensor>>& Room::getSensors() const {
+    const std::vector<std::shared_ptr<Sensor>>& Room::getSensors() const {
         return sensors;
     }
 }

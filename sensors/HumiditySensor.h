@@ -3,7 +3,7 @@
 
 #include "Sensor.h"
 
-namespace SmartHome {
+namespace smart_home {
     class HumiditySensor : public Sensor {
     public:
         HumiditySensor(const std::string &name);

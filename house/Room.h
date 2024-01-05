@@ -9,7 +9,7 @@
 #include "../utils/enums.h"
 #include "../sensors/Sensor.h"
 
-namespace SmartHome {
+namespace smart_home {
     class Room {
     public:
         Room();
@@ -25,12 +25,12 @@ namespace SmartHome {
 
         void generateRandomSensorValues();
 
-        const std::vector<std::unique_ptr<Sensor>>& getSensors() const;
+        const std::vector<std::shared_ptr<Sensor>>& getSensors() const;
 
 
     private:
         RoomType type;
-        std::vector<std::unique_ptr<Sensor>> sensors;
+        std::vector<std::shared_ptr<Sensor>> sensors;
     };
 }
 

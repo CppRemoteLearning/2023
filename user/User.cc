@@ -4,7 +4,7 @@
 #include "../devices/Heater.h"
 #include "../devices/Light.h"
 
-namespace SmartHome {
+namespace smart_home {
      User::User(int numRooms) : userHouse(numRooms) {
         devices.push_back(new Light());
         devices.push_back(new Heater());
@@ -123,7 +123,7 @@ namespace SmartHome {
     }
 
     void User::getDevicesStatus() {
-        SmartHome::StatusPrinter::printDeviceStatus(devices);
+        smart_home::StatusPrinter::printDeviceStatus(devices);
     }
 
     void User::readSensorDataFromRoomDemo() {

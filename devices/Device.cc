@@ -1,6 +1,6 @@
 #include "Device.h"
 
-namespace SmartHome {
+namespace smart_home {
     Device::Device(DeviceType deviceType) : type(deviceType) {}
 
     std::string Device::getDeviceType() const {

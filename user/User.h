@@ -7,7 +7,7 @@
 #include "../house/House.h"
 #include "../devices/Device.h"
 
-namespace SmartHome {
+namespace smart_home {
     class User {
     public:
         explicit User(int numRooms);
@@ -23,7 +23,7 @@ namespace SmartHome {
         House getUserHouse() const;
     private:
         std::vector<Device*> devices;
-        SmartHome::House userHouse;
+        smart_home::House userHouse;
         void copyDevices(const User& other);
         void moveDevices(User& other);
     

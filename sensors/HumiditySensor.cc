@@ -1,7 +1,7 @@
 #include "HumiditySensor.h"
 #include <cstdlib>
 
-namespace SmartHome {
+namespace smart_home {
     HumiditySensor::HumiditySensor(const std::string &name)
             : Sensor(name, MeasureUnit::PERCENT) {}
 

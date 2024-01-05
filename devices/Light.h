@@ -3,14 +3,14 @@
 
 #include "Device.h"
 
-namespace SmartHome {
+namespace smart_home {
     class Light : public Device {
     public:
         Light();
         void setBrightness(int brightness);
         int getBrightness() const;
         void displayStatuses() const override;
-     Light* clone() const override;
+        Light* clone() const override;
     private:
         int brightness;
     };

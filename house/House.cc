@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace SmartHome {
+namespace smart_home {
         House::House(int numRooms) {
             if (numRooms > MAX_ROOMS) {
                 std::cerr << "Error: Number of rooms exceeds maximum number of rooms.\n";

@@ -5,7 +5,7 @@
 #include <array>
 #include "Room.h"
 
-namespace SmartHome {
+namespace smart_home {
     class House {
     public:
         explicit House(int numRooms);
