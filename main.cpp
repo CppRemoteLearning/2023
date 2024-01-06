@@ -1,49 +1,71 @@
 #include <iostream>
-#include "Device.h"
-#include "Room.h"
-#include "Sensor.h"
 #include <set>
 #include <vector>
+#include "pugixml.hpp"
+#include <sstream>
 
-using namespace System::Xml;
+#include "Bathroom.h"
+#include "Bedroom.h"
+#include "Kitchen.h"
 
+#include "Heat.h"
+#include "Ultrasonic.h"
+#include "Pressure.h"
+
+#include "Refrigerator.h"
+#include "Vacuum.h"
+#include "TV.h"
+/*
 void readFromXml()
 {
-    XmlTextReader* reader = new XmlTextReader ("file.xml");
+    pugi::xml_document doc;
+    std::string namePanel;
+    const wchar_t* a = L"SmartHome";
+    pugi::xml_node panels = doc.child(a);
 
-    while (reader->Read())
+    std::cout << panels.name() << std::endl;
+
+    for (pugi::xml_node panel = panels.first_child(); panel; panel = panel.next_sibling())
     {
-        switch (reader->NodeType)
+        //We found a "Panel" -- print it's attributes
+        for (pugi::xml_attribute attr = panel.first_attribute(); attr; attr = attr.next_attribute())
         {
-            case XmlNodeType::Sensor: 
-                
-                while (reader->MoveToNextAttribute()) 
-                    Console::Write(" {0}='{1}'", reader->Name, reader->Value);
-                Console::WriteLine(">");
-                break;
-            case XmlNodeType::Device
-                Console::WriteLine (reader->Value);
-                break;
-            case XmlNodeType::Room
-                Console::Write("</{0}", reader->Name);
-                Console::WriteLine(">");
-                break;
+            std::cout << " " << attr.name() << "=" << attr.value() << std::endl;
+
+            //const wchar_t* name = attr.name();
+            
         }
+        std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
-std::vector<Sensor> sen;
-std::vector<Device> dev;
-std::vector<Room> room;
+*/
+//std::vector<Sensor> sen;
+//std::vector<Device> dev;
+//std::vector<Room> room;
 int main()
 {
     //readFromXml();
+  //  Sensor s;
+ 
+   // std::vector<Device*> vectDiv;
+   // std::set<Sensor*> sss;
+  //  sss.insert(&s);
+    
+   // Device d(sss);
+   // vectDiv.push_back(&d);
+    //Room r(vectDiv);
+    //Sensor sen;
+    Heat h;
+    //std::set<Sensor*> sss;
+    //sss.insert(&h);
+    Refrigerator ref;
+    std::cout<<ref.typeName();
+    std::cout<<h.getName();
+    //Room rom;
 
-    Sensor sen;
-    Device dev;
-    Room rom;
-
-    dev.addSensor(&sen);
-    rom.addDevice(&dev);
+    //dev.addSensor(&sen);
+    //rom.addDevice(&dev);
 
     return 0;
 }

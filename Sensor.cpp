@@ -1,34 +1,73 @@
 #include "Sensor.h"
-
-Sensor::Sensor(double temperature = 0, bool presence = false, double light=0,float humidity=0,char name[20]):nummberID(this->value++){
+int Sensor::value = 0;
+Sensor::Sensor(double temperature, bool presence, double light, float humidity, char *name) : nummberID(this->value++)
+{
     this->temperature = temperature;
     this->presence = presence;
-    this->light =light;
-    this-> humidity = humidity;
-    strcpy(this->name,name);
+    this->light = light;
+    this->humidity = humidity;
+    strcpy(this->name, name);
 }
-int Sensor::value = 0;
-double Sensor::getTemperature()
+Sensor::Sensor(const Sensor &ref) : nummberID(this->value++)
+{
+    if (this != &ref)
+    {
+        this->temperature = ref.getTemperature();
+        this->presence = ref.getPresence();
+        this->light = ref.getLight();
+        this->humidity = ref.getHumidity();
+        strcpy(this->name, ref.getName());
+    }
+}
+Sensor &Sensor::operator=(const Sensor &ref) 
+{
+    if (this != &ref)
+    {
+        this->temperature = ref.getTemperature();
+        this->presence = ref.getPresence();
+        this->light = ref.getLight();
+        this->humidity = ref.getHumidity();
+        strcpy(this->name, ref.getName());
+    }
+    return *this;
+}
+Sensor::~Sensor(){}
+
+Sensor &Sensor::operator=(const Sensor &&ref)
+{
+    if (this != &ref)
+    {
+        this->temperature = ref.getTemperature();
+        this->presence = ref.getPresence();
+        this->light = ref.getLight();
+        this->humidity = ref.getHumidity();
+        strcpy(this->name, ref.getName());
+        
+    }
+    return *this;
+}
+
+const double Sensor::getTemperature() const
 {
     return this->temperature;
 }
-bool Sensor::getPresence()
+const bool Sensor::getPresence() const
 {
     return this->presence;
 }
-double Sensor::getLight()
+const double Sensor::getLight() const
 {
     return this->light;
 }
-float Sensor::getHumidity()
+const float Sensor::getHumidity() const
 {
-return this->humidity;
+    return this->humidity;
 }
-char* Sensor::getName()
+const char *Sensor::getName() const
 {
     return this->name;
 }
-int Sensor::getID()
+const int Sensor::getID() const
 {
     return this->nummberID;
 }

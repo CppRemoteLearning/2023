@@ -1,6 +1,6 @@
 #include "Device.h"
-
-Device::Device(bool isWorking = false, float voltage = 0, char name[20] = "",std::set<Sensor*> sensors):nummberID(this->value++)
+int Device::value = 0;
+Device::Device(std::set<Sensor*> sensors, bool isWorking, float voltage,  char* name):nummberID(this->value++)
 {
     for(auto x: sensors)
     {

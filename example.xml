@@ -1,0 +1,9 @@
+<SmartHome>
+    <Sensor temperature = "20" presence = "true" light = "10" humidity="10.7" name="BACK_PANNEL"></Sensor>
+    <Sensor temperature = "23" presence = "false" light = "18" humidity="19.7" name="FRONT_PANNEL"></Sensor>
+    <Sensor temperature = "38" presence = "true" light = "4" humidity="0.7" name="INNER"></Sensor>
+    <Device sensors = "1,2" isWorking = "true" voltage = "220" name = "Microwave"></Device>
+    <Device sensors = "1,2,3" isWorking = "true" voltage = "220" name = "Refrigerator"></Device>
+    <Room devices="1,2" area = "9" name="Kitchen"></Room>
+</SmartHome>
+
