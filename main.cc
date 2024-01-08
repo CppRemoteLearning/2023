@@ -3,13 +3,13 @@
 
 int main() {
     srand(static_cast<unsigned>(time(nullptr)));
-    smart_home::User user(3);
-    user.getUserHouse().writeDataToFile();
+    smart_home::User& user = smart_home::User::getInstance();
+    smart_home::User::getUserHouse().writeDataToFile();
     std::cout << "Demo Control Devices\n";
     user.controlDevicesDemo();
     std::cout << std::endl;
     std::cout << "Demo Read Sensor Data From Room\n";
-    user.readSensorDataFromRoomDemo();
+    smart_home::User::readSensorDataFromRoomDemo();
     std::cout << std::endl;
     std::cout << "Demo Get Devices Status\n";
     user.getDevicesStatus();
