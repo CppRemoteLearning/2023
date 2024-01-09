@@ -52,7 +52,6 @@ public:
             other.ptr_ = auxPtr;
 
             auxPtr = nullptr;
-            delete auxPtr;
         }
 
         Deleter& auxDel = deleter_;

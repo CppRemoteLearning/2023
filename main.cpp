@@ -41,6 +41,8 @@ int main()
         
         smart_home::UniquePtr<int> arr(new int[3]{1,2,3});
 
+        smart_home::UniquePtr<int> ptr3 = nullptr;
+
         std::cout<< *ptr1<<' '<< *ptr2<<std::endl;
 
         ptr1.swap(ptr2);
