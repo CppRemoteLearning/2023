@@ -3,31 +3,22 @@
 #include "pointers/unique_ptr.h"
 
 int main() {
-    srand(static_cast<unsigned>(time(nullptr)));
-    smart_home::User& user = smart_home::User::getInstance();
-    smart_home::User::getUserHouse().writeDataToFile();
-    std::cout << "Demo Control Devices\n";
-    user.controlDevicesDemo();
-    std::cout << std::endl;
-    std::cout << "Demo Read Sensor Data From Room\n";
-    smart_home::User::readSensorDataFromRoomDemo();
-    std::cout << std::endl;
-    std::cout << "Demo Get Devices Status\n";
-    user.getDevicesStatus();
-
-    std::cout << std::endl;
     std::cout << "Demo Unique Pointer\n";
-    unique_ptr<int> ptr1(new int(10));
-    unique_ptr<int> ptr2(new int(20));
-    std::cout << *ptr1 << std::endl;
-    std::cout << *ptr2 << std::endl;
-    try {
-        ptr1 = std::move(ptr2);
-        std::cout << *ptr1 << std::endl;
-        std::cout << *ptr2 << std::endl;
-    } catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
+    unique_ptr<int> singlePtr(new int(42));
+    std::cout << "singlePtr points to: " << *singlePtr << std::endl;
+
+    singlePtr.reset(new int(55));
+    std::cout << "singlePtr now points to: " << *singlePtr << std::endl;
+
+    {
+        unique_ptr<int[]> arrayPtr(new int[3]{1, 2, 3});
+        std::cout << "arrayPtr points to an array: ";
+        for (int i = 0; i < 3; ++i) {
+            std::cout << arrayPtr[i] << " ";
+        }
+        std::cout << std::endl;
     }
 
+    std::cout << std::endl;
     return 0;
 }
