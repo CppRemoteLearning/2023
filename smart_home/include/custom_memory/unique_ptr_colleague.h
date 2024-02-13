@@ -3,7 +3,7 @@
 
 #include <memory>
 
-namespace smart_home
+namespace custom_memory
 {
 
 template <class T, class Deleter = std::default_delete<T>> class UniquePtr
@@ -108,5 +108,5 @@ private:
     Deleter deleter_;
 };
 
-} // namespace smart_home
+} // namespace custom_memory
 #endif
