@@ -2,9 +2,20 @@
 #define NAGARROREMOTELEARNING_CUSTOM_UNIQUE_PTR_H
 
 #include <memory>
+#include <utility>
+
+// Here I ran into a big problem for using the standard deleter that Marc used, when trying to push_back the unique pointer into a vector of unique pointers
+// I was getting an error that the copy constructor was deleted. This was because the standard deleter was not copyable and the unique pointer was trying to copy the deleter,
+// or at least that is what I think was happening, found something similar on stackoverflow.
+struct DeviceDeleter {
+    template<typename T>
+    void operator()(T* ptr) const {
+        delete ptr;
+    }
+};
 
 namespace custom_memory {
-    template <typename T, typename Deleter = std::default_delete<T>>
+    template <typename T,  typename Deleter = DeviceDeleter>
     class CustomUniquePtr {
     public:
         CustomUniquePtr(T* pointer, Deleter deleter = Deleter()): pointer_(pointer), deleter_(deleter) {}
@@ -13,13 +24,20 @@ namespace custom_memory {
 
         CustomUniquePtr& operator=(const CustomUniquePtr& other) = delete;
 
-        CustomUniquePtr(const CustomUniquePtr&& other);
+        // It is wrong to have them as const because we are moving the pointer from one unique pointer to another
+        CustomUniquePtr(CustomUniquePtr&& other);
 
-        CustomUniquePtr& operator=(const CustomUniquePtr&& other);
+        CustomUniquePtr& operator=(CustomUniquePtr&& other);
 
         ~CustomUniquePtr() {
             deleter_(pointer_);
         }
+
+        template <typename U, typename std::enable_if_t<std::is_convertible<U*, T*>::value, int> = 0>
+        CustomUniquePtr(CustomUniquePtr<U, Deleter>&& other) noexcept : pointer_(other.Release()), deleter_(std::move(other.GetDeleter())) {
+            static_assert(std::is_convertible<U*, T*>::value, "U* must be implicitly convertible to T*");
+        }
+
 
         inline T& operator*() {
             return *pointer_;
@@ -45,6 +63,11 @@ namespace custom_memory {
             return pointer_;
         }
 
+        // overload for const needed in the User class
+        inline const T* Get() const {
+            return pointer_;
+        }
+
         inline Deleter& GetDeleter() {
             return deleter_;
         }
@@ -65,12 +88,12 @@ namespace custom_memory {
     };
 
     template <typename T, typename Deleter>
-    CustomUniquePtr<T, Deleter>::CustomUniquePtr(const CustomUniquePtr&& other): pointer_(std::move(other.pointer_)), deleter_(std::move(other.deleter_)) {
+    CustomUniquePtr<T, Deleter>::CustomUniquePtr(CustomUniquePtr&& other): pointer_(std::move(other.pointer_)), deleter_(std::move(other.deleter_)) {
         other.pointer_ = nullptr;
     }
 
     template <typename T, typename Deleter>
-    CustomUniquePtr<T, Deleter>& CustomUniquePtr<T, Deleter>::operator=(const CustomUniquePtr&& other) {
+    CustomUniquePtr<T, Deleter>& CustomUniquePtr<T, Deleter>::operator=(CustomUniquePtr&& other) {
         if (this != &other) {
             this->Reset(other.Release());
             deleter_ = std::move(other.deleter_);
@@ -107,6 +130,12 @@ namespace custom_memory {
             }
             pointer_ = newPointer;
         }
+    }
+
+    // helper function to create a unique pointer, copied from std::unique_ptr
+    template <typename T, typename... Args>
+    CustomUniquePtr<T> MakeCustomUnique(Args&&... args) {
+        return CustomUniquePtr<T>(new T(std::forward<Args>(args)...));
     }
 }
 
