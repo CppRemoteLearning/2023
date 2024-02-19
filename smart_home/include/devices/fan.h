@@ -10,7 +10,7 @@ namespace devices {
 
 class Fan : public Device {
   public:
-    Fan(rooms::Room* room): Device(room) {}
+    Fan(std::shared_ptr<rooms::Room> room): Device(room) {}
 
     void SetIsOn(bool value) override;
 
@@ -26,7 +26,7 @@ class Fan : public Device {
 
     void SetIsRotating(bool value);
 
-    void SetOnAuto(sensors::Sensor* sensor) override;
+    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
 
   private:
     uint8_t speed = 0;

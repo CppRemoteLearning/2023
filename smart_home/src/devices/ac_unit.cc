@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "devices/ac_unit.h"
 
 namespace devices {
@@ -33,7 +34,10 @@ void AcUnit::SetDesiredTemperature(float value) {
     }
 }
 
-void AcUnit::SetOnAuto(sensors::Sensor* sensor) {
+void AcUnit::SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) {
+    if (!sensor) {
+        return;
+    }
 
     if (std::any_cast<float>(sensor->GetData()) > 28) {
         SetIsOn(true);

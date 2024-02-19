@@ -13,7 +13,11 @@ void LightBulb::SetIsOn(bool value) {
     }
 }
 
-void LightBulb::SetOnAuto(sensors::Sensor* sensor) {
+void LightBulb::SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) {
+    if (!sensor) {
+        return;
+    }
+
     if (std::any_cast<bool>(sensor->GetData())) {
         SetIsOn(true);
     }

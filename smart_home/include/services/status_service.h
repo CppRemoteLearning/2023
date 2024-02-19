@@ -11,23 +11,23 @@ namespace services {
 
 class StatusService {
     public:
-      std::vector<sensors::Sensor*> GetSensors() {
+      std::vector<std::shared_ptr<sensors::Sensor>> GetSensors() {
         return sensors;
       }
 
-      std::vector<devices::Device*> GetDevices() {
+      std::vector<std::shared_ptr<devices::Device>> GetDevices() {
         return devices;
       }
 
-      void AddSensor(sensors::Sensor* sensor);
+      void AddSensor(std::shared_ptr<sensors::Sensor> sensor);
 
-      void AddDevice(devices::Device* device);
+      void AddDevice(std::shared_ptr<devices::Device> device);
 
       void PrintStatus();
 
     private:
-      std::vector<sensors::Sensor*> sensors;
-      std::vector<devices::Device*> devices;
+      std::vector<std::shared_ptr<sensors::Sensor>> sensors;
+      std::vector<std::shared_ptr<devices::Device>> devices;
 };
 
 } // namespace services

@@ -11,7 +11,7 @@ namespace devices {
 
 class Device {
   public:
-    Device(rooms::Room* room): room(room) {}
+    Device(std::shared_ptr<rooms::Room> room);
 
     inline bool GetIsOn() {
       return is_on;
@@ -19,15 +19,15 @@ class Device {
 
     virtual void SetIsOn(bool value);
 
-    inline rooms::Room* GetRoom() {
+    inline std::shared_ptr<rooms::Room> GetRoom() {
       return room;
     }
 
-    virtual void SetOnAuto(sensors::Sensor* sensor) = 0;
+    virtual void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) = 0;
 
   protected:
     bool is_on = false;
-    rooms::Room* room = nullptr;
+    std::shared_ptr<rooms::Room> room;
 };
 
 } // namespace devices

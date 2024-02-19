@@ -10,7 +10,7 @@ namespace devices {
 
 class AcUnit : public Device {
   public:
-    AcUnit(rooms::Room* room): Device(room) {}
+    AcUnit(std::shared_ptr<rooms::Room> room): Device(room) {}
 
     void SetIsOn(bool value) override;
 
@@ -26,7 +26,7 @@ class AcUnit : public Device {
 
     void SetDesiredTemperature(float value);
 
-    void SetOnAuto(sensors::Sensor* sensor) override;
+    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
 
   private:
     uint8_t fan_speed = 0;

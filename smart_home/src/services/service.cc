@@ -5,8 +5,8 @@
 
 namespace services {
 
-std::vector<sensors::Sensor*> Service::GetSensors() {
-    std::vector<sensors::Sensor*> sensors;
+std::vector<std::shared_ptr<sensors::Sensor>> Service::GetSensors() {
+    std::vector<std::shared_ptr<sensors::Sensor>> sensors;
 
     for (auto& sensor_device : sensor_devices) {
         sensors.push_back(sensor_device.first);
@@ -15,8 +15,8 @@ std::vector<sensors::Sensor*> Service::GetSensors() {
     return sensors;
 }
 
-std::vector<devices::Device*> Service::GetDevices() {
-    std::vector<devices::Device*> devices;
+std::vector<std::shared_ptr<devices::Device>> Service::GetDevices() {
+    std::vector<std::shared_ptr<devices::Device>> devices;
 
     for (auto& sensor_device : sensor_devices) {
         for (auto& device : sensor_device.second) {
@@ -27,8 +27,8 @@ std::vector<devices::Device*> Service::GetDevices() {
     return devices;
 }
 
-void Service::AddSensor(sensors::Sensor* sensor) {
-    if (sensor == nullptr) {
+void Service::AddSensor(std::shared_ptr<sensors::Sensor> sensor) {
+    if (!sensor) {
             return;
     }
 
@@ -39,10 +39,14 @@ void Service::AddSensor(sensors::Sensor* sensor) {
         }
     }
 
-    sensor_devices.insert({sensor, std::vector<devices::Device*>()});
+    sensor_devices.insert({sensor, std::vector<std::shared_ptr<devices::Device>>()});
 }
 
-void Service::AddDevice(devices::Device* device) {
+void Service::AddDevice(std::shared_ptr<devices::Device> device) {
+    if (!device) {
+        return;
+    }
+
     for (auto& sensor_device : sensor_devices) {
         if (sensor_device.first->GetRoom() == device->GetRoom()) {
             sensor_device.second.push_back(device);
@@ -53,7 +57,7 @@ void Service::AddDevice(devices::Device* device) {
 
 void Service::SetDevicesOnAuto() {
     for (auto& sensor_device : sensor_devices) {
-        for (devices::Device* device : sensor_device.second) {
+        for (auto& device : sensor_device.second) {
             device->SetOnAuto(sensor_device.first);
         }
     }

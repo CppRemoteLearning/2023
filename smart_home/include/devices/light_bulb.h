@@ -10,11 +10,11 @@ namespace devices {
 
 class LightBulb : public Device {
   public:
-    LightBulb(rooms::Room* room): Device(room) {}
+    LightBulb(std::shared_ptr<rooms::Room> room): Device(room) {}
 
     void SetIsOn(bool value) override;
 
-    void SetOnAuto(sensors::Sensor* sensor) override;
+    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
 };
 
 } // namespace devices
