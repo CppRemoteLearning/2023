@@ -2,12 +2,10 @@
 
 #include "Sensors/lightsensor.h"
 #include "Devices/acunit.h"
-
-#include "Sensors/lightsensor.h"
-#include "Devices/acunit.h"
 #include "smarthomestatus.h"
 
 #include "uniqueptr.h"
+#include "andreea_unique_ptr"
 
 int main()
 {
@@ -36,42 +34,22 @@ int main()
 
         // smartHome.AddToXml("../data.xml");
 
-        smart_home::UniquePtr<int> ptr1(new int(1));
-        smart_home::UniquePtr<int> ptr2(new int(3));
-        
-        smart_home::UniquePtr<int> arr(new int[3]{1,2,3});
+        smart_home::MyUniquePtr<smart_home::Sensor> light(new smart_home::LightSensor("Light", 600));
+        smart_home::MyUniquePtr<smart_home::Device> ac(new smart_home::AcUnit("ac"));
 
-        smart_home::UniquePtr<int> ptr3 = nullptr;
+        smart_home::Room room("Room");
 
-        std::cout<< *ptr1<<' '<< *ptr2<<std::endl;
+        room.AddDevice(std::move(ac));
+        room.AddSensor(std::move(light));
 
-        ptr1.swap(ptr2);
+        room.GetDevices();
+        room.GetSensors();
 
-        std::cout<< *ptr1<<' '<< *ptr2 << arr[1]<< std::endl;
+        std::cout<<room.GetName();
 
-        smart_home::UniquePtr<smart_home::LightSensor> light
-        (new smart_home::LightSensor("Light", 600));
+        room.DeleteDevice("ac");
+        room.DeleteSensor("Light");
 
-        if (light)
-        {
-            std::cout<< std::endl<<light->GetIntensity()<< std::endl;
-        }
-        
-        light.reset();
-        
-        if (light)
-        {
-            std::cout<< std::endl<<light->GetIntensity()<< std::endl;
-        }
-
-        light.release();
-        
-        if (light)
-        {
-            std::cout<< std::endl<<light->GetIntensity()<< std::endl;
-        }
-        
-        smart_home::UniquePtr<smart_home::AcUnit> ac(new smart_home::AcUnit("ac"));
         // std::vector<smart_home::StatusObject*> obj;
 
         // obj.push_back(&light);

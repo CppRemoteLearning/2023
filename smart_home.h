@@ -6,6 +6,8 @@
 
 #include "room.h"
 #include "TinyXml/tinyxml2.h"
+#include "optional"
+#include "Sensors/lightsensor.h"
 
 namespace smart_home
 {
@@ -13,16 +15,16 @@ namespace smart_home
 class SmartHome
 {
 public:
-    // void GetDataFromXml(const char* filename);
+    //void GetDataFromXml(const char* filename);
     // void AddToXml(const std::string &filename);
 
-    std::vector<Room>* GetRooms();
-    Room* GetRoom(const std::string &roomName);
+    std::vector<MyUniquePtr<Room>>& GetRooms();
+    std::optional<MyUniquePtr<Room>> GetRoom(const std::string &roomName);
 
 private:
     // Sensor& getSensorFromXml(tinyxml2::XMLElement* sensorElement);
     // Device& getDeviceFromXml(tinyxml2::XMLElement* deviceElement);
-    std::vector<Room> rooms_;
+    std::vector<MyUniquePtr<Room>> rooms_;
     
 };
 } // namespace smart_home

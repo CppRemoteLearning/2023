@@ -10,31 +10,37 @@ namespace smart_home
 //         throw std::invalid_argument("Error loading file!");
 //     }
 
-//     tinyxml2::XMLNode* pRoot = xmlDoc.RootElement();
-//     if (pRoot == nullptr) {
+//     MyUniquePtr<tinyxml2::XMLNode, StandardDeleter<>> pRoot(xmlDoc.RootElement());
+//     if (pRoot->Value() == nullptr) {
 //         throw std::invalid_argument("Invalid XML format!");
 //     }
 
-//     tinyxml2::XMLElement* pRoomElement = pRoot->FirstChildElement();
+//     MyUniquePtr<tinyxml2::XMLElement> pRoomElement(pRoot->FirstChildElement());
     
-//     if (pRoomElement == nullptr) {
+//     if (pRoomElement->Value() == nullptr) {
 //         throw std::invalid_argument("Room element is null!");
 //     }
 
-//     for (pRoomElement; pRoomElement != nullptr; pRoomElement = pRoomElement->NextSiblingElement("Room")) {
-//         const char* roomName = pRoomElement->Attribute("name");
-
-//         Room room(roomName);
-
-//         for (tinyxml2::XMLElement* sensorElement = pRoomElement->FirstChildElement("Sensor"); sensorElement != nullptr; sensorElement = sensorElement->NextSiblingElement("Sensor")) {
-//             room.AddSensor(getSensorFromXml(sensorElement));
+//     for (pRoomElement; pRoomElement->Value() != nullptr; pRoomElement.reset(pRoomElement->NextSiblingElement("Room"))) {
+//         MyUniquePtr<Room> room;
+        
+//         if(const char* roomName = pRoomElement->Attribute("name")){
+//             room->SetName(roomName);
+//         }
+//         else
+//         {
+//             throw std::invalid_argument("Room name wasn't found!");
 //         }
 
-//         for (tinyxml2::XMLElement* deviceElement = pRoomElement->FirstChildElement("Device"); deviceElement != nullptr; deviceElement = deviceElement->NextSiblingElement("Device")) {
-//             room.AddDevice(getDeviceFromXml(deviceElement));
+//         for (MyUniquePtr<tinyxml2::XMLElement> sensorElement(pRoomElement->FirstChildElement("LightSensor")); sensorElement->Value() != nullptr; sensorElement.reset(sensorElement->NextSiblingElement("Sensor"))) {
+//             //room->AddSensor(std::move(MyUniquePtr<Sensor>(LightSensor(std::move(sensorElement)))));
 //         }
 
-//         rooms_.push_back(room);
+//         // for (tinyxml2::XMLElement* deviceElement = pRoomElement->FirstChildElement("Device"); deviceElement != nullptr; deviceElement = deviceElement->NextSiblingElement("Device")) {
+//         //     room.AddDevice(getDeviceFromXml(deviceElement));
+//         // }
+
+//         rooms_.push_back(std::move(room));
 //     }
 // }
 
@@ -74,21 +80,21 @@ namespace smart_home
 //         }
 // }
 
-std::vector<Room>* SmartHome::GetRooms()
+std::vector<MyUniquePtr<Room>>& SmartHome::GetRooms()
 {
-    return &rooms_;
+    return rooms_;
 }
 
-Room* SmartHome::GetRoom(const std::string &roomName)
+std::optional<MyUniquePtr<Room>> SmartHome::GetRoom(const std::string &roomName)
 {
     for (auto &room : rooms_)
     {
-        if (room.GetName() == roomName)
+        if (room->GetName() == roomName)
         {
-            return &room;
+            return std::move(room);
         }
     }
-    return nullptr;
+    return std::nullopt;
 }
 
 // Sensor& SmartHome::getSensorFromXml(tinyxml2::XMLElement* sensorElement)
