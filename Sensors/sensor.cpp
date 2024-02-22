@@ -12,11 +12,24 @@ void Sensor::SetName(const std::string &name)
 {
     name_ = name;
 }
+
+float Sensor::GetAFloatValue(tinyxml2::XMLElement *sensorElement, const char* name) {
+    float value;
+
+    if (sensorElement->QueryFloatAttribute(name, &value) == tinyxml2::XMLError::XML_NO_ATTRIBUTE)
+    {
+        return 0;
+    }
+    else
+    {
+        return value;
+    }
+}
     
 
 Sensor::Sensor(const std::string &name): name_{name} {}
 
-Sensor::Sensor(MyUniquePtr<tinyxml2::XMLElement> &&sensorElement){
+Sensor::Sensor(tinyxml2::XMLElement *sensorElement){
 
     if (const char* name = sensorElement->Attribute("name"))
     {

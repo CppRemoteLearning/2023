@@ -5,18 +5,9 @@ namespace smart_home
 
 LightSensor::LightSensor(const std::string &name, float intensity): Sensor(name), intensity_{intensity} {}
 
-LightSensor::LightSensor(MyUniquePtr<tinyxml2::XMLElement>&& sensorElement): Sensor(std::move(sensorElement))
+LightSensor::LightSensor(tinyxml2::XMLElement *sensorElement): Sensor(sensorElement)
 {
-    float intensity;
-
-    if (sensorElement->QueryFloatAttribute("value", &intensity) == tinyxml2::XMLError::XML_NO_ATTRIBUTE)
-    {
-        intensity_ = 0;
-    }
-    else
-    {
-        intensity_ = intensity;
-    }
+    intensity_ = GetAFloatValue(sensorElement, "intensity");
 }
 
 float LightSensor::GetIntensity()

@@ -12,8 +12,19 @@ int main()
     smart_home::SmartHome smartHome;
     try
     {
-        //smartHome.GetDataFromXml("../data.xml");
+        smartHome.GetDataFromXml("../data.xml");
         
+        smart_home::MyUniquePtr<smart_home::Room> room = smartHome.GetRoom("LivingRoom").value();
+        for (auto& pres : room->GetSensors())
+        {
+            std::cout<<pres->Status();
+        }
+        
+        for (auto& pres : room->GetDevices())
+        {
+            std::cout<<pres->Status();
+        }
+
         //smart_home::Device device("BathroomDoor", "Door", true);
         //smart_home::Sensor presence("PresenceSensor", "Presence", 0);
         
@@ -34,21 +45,21 @@ int main()
 
         // smartHome.AddToXml("../data.xml");
 
-        smart_home::MyUniquePtr<smart_home::Sensor> light(new smart_home::LightSensor("Light", 600));
-        smart_home::MyUniquePtr<smart_home::Device> ac(new smart_home::AcUnit("ac"));
+        // smart_home::MyUniquePtr<smart_home::Sensor> light(new smart_home::LightSensor("Light", 600));
+        // smart_home::MyUniquePtr<smart_home::Device> ac(new smart_home::AcUnit("ac"));
 
-        smart_home::Room room("Room");
+        // smart_home::Room room("Room");
 
-        room.AddDevice(std::move(ac));
-        room.AddSensor(std::move(light));
+        // room.AddDevice(std::move(ac));
+        // room.AddSensor(std::move(light));
 
-        room.GetDevices();
-        room.GetSensors();
+        // room.GetDevices();
+        // room.GetSensors();
 
-        std::cout<<room.GetName();
+        // std::cout<<room.GetName();
 
-        room.DeleteDevice("ac");
-        room.DeleteSensor("Light");
+        // room.DeleteDevice("ac");
+        // room.DeleteSensor("Light");
 
         // std::vector<smart_home::StatusObject*> obj;
 

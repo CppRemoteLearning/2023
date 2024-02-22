@@ -16,7 +16,7 @@ class Sensor : public StatusObject
 {
 public:
     Sensor(const std::string &name = "");
-    Sensor(MyUniquePtr<tinyxml2::XMLElement>&& sensorElement);
+    Sensor(tinyxml2::XMLElement *sensorElement);
 
     Sensor(const Sensor &sensor);
     Sensor& operator = (const Sensor &sensor); 
@@ -31,6 +31,9 @@ public:
     const std::string Status() = 0;
     
     virtual ~Sensor() = default;
+
+protected:
+    float GetAFloatValue(tinyxml2::XMLElement *sensorElement, const char* name);
 
 private:
     std::string name_;
