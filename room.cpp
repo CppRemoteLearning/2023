@@ -52,13 +52,23 @@ void Room::SetName(const std::string &name)
     name_ = name;
 }
 
-std::vector<MyUniquePtr<Sensor>>& Room::GetSensors()
+std::vector<StatusObject*> Room::GetSensors()
 {
-    return sensors_;
+    std::vector<StatusObject*> rawPtrs;
+    for (MyUniquePtr<Sensor>& ptr : sensors_) {
+        rawPtrs.push_back(ptr.get());
+    }
+
+    return rawPtrs;
 }
 
-std::vector<MyUniquePtr<Device>>& Room::GetDevices()
+std::vector<StatusObject*> Room::GetDevices()
 {
-    return devices_;
+    std::vector<StatusObject*> rawPtrs;
+    for (MyUniquePtr<Device>& ptr : devices_) {
+        rawPtrs.push_back(ptr.get());
+    }
+
+    return rawPtrs;
 }
 } // namespace smart_home

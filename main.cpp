@@ -15,15 +15,9 @@ int main()
         smartHome.GetDataFromXml("../data.xml");
         
         smart_home::MyUniquePtr<smart_home::Room> room = smartHome.GetRoom("LivingRoom").value();
-        for (auto& pres : room->GetSensors())
-        {
-            std::cout<<pres->Status();
-        }
+        smart_home::SmartHomeStatus::PrintStatus(std::move(room->GetSensors()));
+        smart_home::SmartHomeStatus::PrintStatus(std::move(room->GetDevices()));
         
-        for (auto& pres : room->GetDevices())
-        {
-            std::cout<<pres->Status();
-        }
 
         //smart_home::Device device("BathroomDoor", "Door", true);
         //smart_home::Sensor presence("PresenceSensor", "Presence", 0);

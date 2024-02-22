@@ -13,7 +13,7 @@ namespace smart_home
 class SmartHomeStatus
 {
 public:
-    static void PrintSensorsStatus(std::vector<MyUniquePtr<StatusObject>> objects);
+    static void PrintStatus(std::vector<StatusObject*> &&objects);
 
 };
     

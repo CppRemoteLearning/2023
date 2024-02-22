@@ -24,8 +24,8 @@ public:
     std::string& GetName();
     void SetName(const std::string &name);
 
-    std::vector<MyUniquePtr<Sensor>>& GetSensors();
-    std::vector<MyUniquePtr<Device>>& GetDevices();
+    std::vector<StatusObject*> GetSensors();
+    std::vector<StatusObject*> GetDevices();
 
 private:
     std::string name_;
