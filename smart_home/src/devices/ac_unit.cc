@@ -34,7 +34,7 @@ void AcUnit::SetDesiredTemperature(float value) {
     }
 }
 
-void AcUnit::SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) {
+void AcUnit::SetOnAuto(sensors::Sensor* sensor) {
     if (!sensor) {
         return;
     }

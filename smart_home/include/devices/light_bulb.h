@@ -14,7 +14,7 @@ class LightBulb : public Device {
 
     void SetIsOn(bool value) override;
 
-    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
+    void SetOnAuto(sensors::Sensor* sensor) override;
 };
 
 } // namespace devices

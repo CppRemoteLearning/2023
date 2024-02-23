@@ -33,7 +33,7 @@ void Fan::SetIsRotating(bool value) {
     }
 }
 
-void Fan::SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) {
+void Fan::SetOnAuto(sensors::Sensor* sensor) {
     if (!sensor) {
         return;
     }

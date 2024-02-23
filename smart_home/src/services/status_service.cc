@@ -8,13 +8,13 @@
 
 namespace services {
 
-void StatusService::AddSensor(std::shared_ptr<sensors::Sensor> sensor) {
+void StatusService::AddSensor(sensors::Sensor* sensor) {
     if (sensor) {
         sensors.push_back(sensor);
     }
 }
 
-void StatusService::AddDevice(std::shared_ptr<devices::Device> device) {
+void StatusService::AddDevice(devices::Device* device) {
     if (device) {
         devices.push_back(device);
     }

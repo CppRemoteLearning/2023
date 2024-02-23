@@ -23,7 +23,7 @@ class Device {
       return room;
     }
 
-    virtual void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) = 0;
+    virtual void SetOnAuto(sensors::Sensor* sensor) = 0;
 
   protected:
     bool is_on = false;

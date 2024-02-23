@@ -26,7 +26,7 @@ class AcUnit : public Device {
 
     void SetDesiredTemperature(float value);
 
-    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
+    void SetOnAuto(sensors::Sensor* sensor) override;
 
   private:
     uint8_t fan_speed = 0;

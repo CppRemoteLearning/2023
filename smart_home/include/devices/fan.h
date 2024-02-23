@@ -26,7 +26,7 @@ class Fan : public Device {
 
     void SetIsRotating(bool value);
 
-    void SetOnAuto(std::shared_ptr<sensors::Sensor> sensor) override;
+    void SetOnAuto(sensors::Sensor* sensor) override;
 
   private:
     uint8_t speed = 0;

@@ -47,8 +47,8 @@ int main()
 
         std::cout << "Bedroom size: " << bedroom->GetSize() << std::endl;
 
-        std::shared_ptr<sensors::TemperatureSensor> temperature_sensor = std::make_shared<sensors::TemperatureSensor>(bedroom);
-        std::shared_ptr<sensors::PresenceSensor> presence_sensor = std::make_shared<sensors::PresenceSensor>(bedroom);
+        std::unique_ptr<sensors::TemperatureSensor> temperature_sensor = std::make_unique<sensors::TemperatureSensor>(bedroom);
+        std::unique_ptr<sensors::PresenceSensor> presence_sensor = std::make_unique<sensors::PresenceSensor>(bedroom);
 
         // this will throw a runtime exception because room is null
         // std::shared_ptr<sensors::PresenceSensor> presence_sensor = std::make_shared<sensors::PresenceSensor>(nullptr);
@@ -67,9 +67,9 @@ int main()
         element->SetText(std::to_string(std::any_cast<float>(temperature_sensor->GetData())).c_str());
         node->InsertEndChild(element);
 
-        std::shared_ptr<devices::AcUnit> ac_unit = std::make_shared<devices::AcUnit>(bedroom);
-        std::shared_ptr<devices::Fan> fan = std::make_shared<devices::Fan>(bedroom);
-        std::shared_ptr<devices::LightBulb> light_bulb = std::make_shared<devices::LightBulb>(bedroom);
+        std::unique_ptr<devices::AcUnit> ac_unit = std::make_unique<devices::AcUnit>(bedroom);
+        std::unique_ptr<devices::Fan> fan = std::make_unique<devices::Fan>(bedroom);
+        std::unique_ptr<devices::LightBulb> light_bulb = std::make_unique<devices::LightBulb>(bedroom);
 
         // this will throw a runtime exception because room is null
         // std::shared_ptr<devices::LightBulb> light_bulb = std::make_shared<devices::LightBulb>(nullptr);
@@ -77,12 +77,12 @@ int main()
         custom_memory::UniquePtr<services::TemperatureService> temperature_service(new services::TemperatureService());
         custom_memory::UniquePtr<services::PresenceService> presence_service(new services::PresenceService());
 
-        temperature_service->AddSensor(temperature_sensor);
-        temperature_service->AddDevice(ac_unit);
-        temperature_service->AddDevice(fan);
+        temperature_service->AddSensor(std::move(temperature_sensor));
+        temperature_service->AddDevice(std::move(ac_unit));
+        temperature_service->AddDevice(std::move(fan));
 
-        presence_service->AddSensor(presence_sensor);
-        presence_service->AddDevice(light_bulb);
+        presence_service->AddSensor(std::move(presence_sensor));
+        presence_service->AddDevice(std::move(light_bulb));
 
         std::cout << "Number of sensors of temperature service: " << temperature_service->GetSensors().size() << std::endl;
         std::cout << "Number of devices of temperature service: " << temperature_service->GetDevices().size() << std::endl;
@@ -91,11 +91,11 @@ int main()
 
         temperature_element = temperature_element->NextSiblingElement();
         temperature = std::stof(temperature_element->GetText());
-        temperature_sensor->SetData(temperature);
+        temperature_service->SetSensorData(bedroom.get(), temperature);
 
-        std::cout << "Current temperature after cooling: " << std::any_cast<float>(temperature_sensor->GetData()) << std::endl;
+        std::cout << "Current temperature after cooling: " << std::any_cast<float>(temperature_service->GetSensorData(bedroom.get())) << std::endl;
         element = write_document.NewElement("Temperature");
-        element->SetText(std::to_string(std::any_cast<float>(temperature_sensor->GetData())).c_str());
+        element->SetText(std::to_string(std::any_cast<float>(temperature_service->GetSensorData(bedroom.get()))).c_str());
         node->InsertEndChild(element);
 
         temperature_service->Refresh();
@@ -104,20 +104,30 @@ int main()
         // a wrapper method can be made in order to reduce duplicate code
         temperature_element = temperature_element->NextSiblingElement();
         temperature = std::stof(temperature_element->GetText());
-        temperature_sensor->SetData(temperature);
+        temperature_service->SetSensorData(bedroom.get(), temperature);
         element = write_document.NewElement("Temperature");
-        element->SetText(std::to_string(std::any_cast<float>(temperature_sensor->GetData())).c_str());
+        element->SetText(std::to_string(std::any_cast<float>(temperature_service->GetSensorData(bedroom.get()))).c_str());
         node->InsertEndChild(element);
 
         temperature_service->Refresh();
 
         presence_service->Refresh();
 
-        status_service->AddSensor(temperature_sensor);
-        status_service->AddSensor(presence_sensor);
-        status_service->AddDevice(ac_unit);
-        status_service->AddDevice(fan);
-        status_service->AddDevice(light_bulb);
+        for (auto &sensor : temperature_service->GetSensors()) {
+            status_service->AddSensor(sensor);
+        }
+
+        for (auto &sensor : presence_service->GetSensors()) {
+            status_service->AddSensor(sensor);
+        }
+
+        for (auto &device : temperature_service->GetDevices()) {
+            status_service->AddDevice(device);
+        }
+
+        for (auto &device : presence_service->GetDevices()) {
+            status_service->AddDevice(device);
+        }
 
         status_service->PrintStatus();
 
