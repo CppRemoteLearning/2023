@@ -1,10 +1,5 @@
 <SmartHome>
-    <!-- <Room name="Kitchen">
-        <Sensor name="HumiditySensor" type="Humidity" value="11"/>
-        <Sensor name="PresenceSensor" type="Presence" value="1"/>
-        <Device name="Fan" type="Fan" status="false"/>
-        <Device name="ACUnit" type="AC" status="false"/>
-    </Room> -->
+
     <Room name="LivingRoom">
         <LightSensor name="LightSensor" intensity="200"/>
         <HumiditySensor name="HumSensor" humidity="10"/>
@@ -14,4 +9,6 @@
         <AcUnit name="Cooler" status="On" mode="Cold"/>
         <LightBulb name="Bulb1" status="On"/>
     </Room>
+
+
 </SmartHome>

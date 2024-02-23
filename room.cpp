@@ -52,7 +52,7 @@ void Room::SetName(const std::string &name)
     name_ = name;
 }
 
-std::vector<StatusObject*> Room::GetSensors()
+const std::vector<StatusObject*> Room::GetSensors()
 {
     std::vector<StatusObject*> rawPtrs;
     for (MyUniquePtr<Sensor>& ptr : sensors_) {
@@ -62,7 +62,7 @@ std::vector<StatusObject*> Room::GetSensors()
     return rawPtrs;
 }
 
-std::vector<StatusObject*> Room::GetDevices()
+const std::vector<StatusObject*> Room::GetDevices()
 {
     std::vector<StatusObject*> rawPtrs;
     for (MyUniquePtr<Device>& ptr : devices_) {

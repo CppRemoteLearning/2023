@@ -13,7 +13,7 @@ namespace smart_home
 class SmartHomeStatus
 {
 public:
-    static void PrintStatus(std::vector<StatusObject*> &&objects);
+    static void PrintStatus(const std::vector<StatusObject*> &objects);
 
 };
     
