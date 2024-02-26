@@ -28,6 +28,7 @@ namespace smart_home {
         void controlDevicesDemo();
         void getDevicesStatus();
         static House getUserHouse();
+        void User::demoPrintSensorDataFromLivingRoom();
 
     private:
         explicit User(int numRooms);

@@ -84,6 +84,11 @@ namespace smart_home {
         }
     }
 
+    // for simplicity purpose, I chose to make a demo for the thread homework, to avoid complicating with room selection
+    void User::demoPrintSensorDataFromLivingRoom(){
+        StatusPrinter::printSensorDataFromRoom(RoomType::LIVING_ROOM);
+    }
+
     void User::getDevicesStatus() {
         std::vector<const Device*> rawDevicePointers;
         rawDevicePointers.reserve(devices.size());
