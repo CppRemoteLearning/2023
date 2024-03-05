@@ -2,9 +2,11 @@
 
 namespace smart_home
 {
+    SmartHomeStatus::SmartHomeStatus(std::shared_ptr<std::mutex> mutex): mutex_{mutex}{}
+
     void SmartHomeStatus::PrintStatus(const std::vector<StatusObject*> &objects, std::string title)
     {
-        std::unique_lock<std::mutex> lock(this->mutex_);
+        std::unique_lock<std::mutex> lock(*mutex_.get());
 
         std::cout<<"_________________"<< std::endl;
         std::cout<< title<< std::endl;
@@ -30,7 +32,7 @@ namespace smart_home
             for (auto i = 0; i < rooms.size(); i++)
             {
                 {
-                    std::unique_lock<std::mutex> lock(this->mutex_);
+                    std::unique_lock<std::mutex> lock(*mutex_.get());
 
                     std::cout<<"+++++++++++++++++"<< std::endl;
                     std::cout<<"Room name:"<< rooms[i]->GetName()<< std::endl;

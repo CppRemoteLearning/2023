@@ -20,6 +20,8 @@ public:
 private:
     void DoChanges();
     SmartHome& smartHome_;
+    std::shared_ptr<std::mutex> mutex_;
+
 };
     
 } // namespace smart_home

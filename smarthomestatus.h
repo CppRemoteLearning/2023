@@ -16,11 +16,12 @@ namespace smart_home
 class SmartHomeStatus
 {
 public:
+    SmartHomeStatus(std::shared_ptr<std::mutex> mutex);
     void PrintStatus(const std::vector<StatusObject*> &objects, std::string title);
     void PrintSmartHomeStatus(SmartHome &smartHome);
 
 private:
-    std::mutex mutex_;
+    std::shared_ptr<std::mutex> mutex_;
 };
     
 } // namespace smart_home

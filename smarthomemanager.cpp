@@ -3,7 +3,7 @@
 namespace smart_home
 {
 
-    SmartHomeManager::SmartHomeManager(SmartHome &smart_home): smartHome_{smart_home} {}
+    SmartHomeManager::SmartHomeManager(SmartHome &smart_home): smartHome_{smart_home}, mutex_{std::make_shared<std::mutex> ()} {}
 
     void SmartHomeManager::Start()
     {
@@ -12,8 +12,8 @@ namespace smart_home
             std::string filename = "../data_files/data0.xml";
             std::cout<<filename<<std::endl<<std::endl;
             smartHome_.GetDataFromXml( filename.c_str());
+            smart_home::SmartHomeStatus status(mutex_);
 
-            smart_home::SmartHomeStatus status;
             
             std::thread statusThread([this, &status]() {
                     status.PrintSmartHomeStatus(this->smartHome_);
@@ -37,16 +37,62 @@ namespace smart_home
 
     void SmartHomeManager::DoChanges()
     {
-        std::this_thread::sleep_for(std::chrono::seconds(10));
-
-        smart_home::Room *room = smartHome_.GetRoom("LivingRoom").value();
-        room->AddDevice(smart_home::MyUniquePtr<smart_home::Device>(new smart_home::Door("MainDoor", smart_home::DeviceStatus::kOn)));
-        room->DeleteSensor("LightSensor");
+        while (true)
+        {
+            std::cout<<"\n\nIf you want to delete a Sensor/Device press D\n\n";
             
-        smart_home::Device* ac = room->GetDevice("Cooler").value();
-        ac->SetName("AC UNIT");
+            std::string input;
+            smart_home::Room *room = smartHome_.GetRoom("LivingRoom").value();
 
-        std::this_thread::sleep_for(std::chrono::seconds(30));
+            do
+            {
+                std::cin >> input;
+            } while (input != "D");
+            
+            {
+                std::unique_lock<std::mutex> lock(*mutex_.get());
+                std::cout<<"If you want to delete a Sensor press S\n";
+                std::cout<<"If you want to delete a Device press D\n";
+                std::cout<<"If you want to abort the operation press anything else\n";
+
+                std::cin >> input;
+
+                if (input == "S")
+                {
+                    std::cout<<"Please type the sensor name\n";
+                    std::cout<<"If you want to abort the operation press X\n";
+
+                    std::cin >> input;
+                    if (input != "X")
+                    {
+                        room->DeleteSensor(input);
+                    }
+                }
+
+                if (input == "D")
+                {
+                    std::cout<<"Please type the device name\n";
+                    std::cout<<"If you want to abort the operation press X\n";
+
+                    std::cin >> input;
+                    if (input != "X")
+                    {
+                        room->DeleteDevice(input);
+                    }
+                }
+            }
+        }
+        
+        // std::this_thread::sleep_for(std::chrono::seconds(10));
+
+        // smart_home::Room *room = smartHome_.GetRoom("LivingRoom").value();
+        // room->AddDevice(smart_home::MyUniquePtr<smart_home::Device>(new smart_home::Door("MainDoor", smart_home::DeviceStatus::kOn)));
+        // room->DeleteSensor("LightSensor");
+            
+        // smart_home::Device* ac = room->GetDevice("Cooler").value();
+        // ac->SetName("AC UNIT");
+
+        // std::this_thread::sleep_for(std::chrono::seconds(30));
     }
 
 } // namespace smart_home
