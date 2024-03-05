@@ -98,6 +98,16 @@ namespace smart_home {
         smart_home::StatusPrinter::printDeviceStatus(rawDevicePointers);
     }
 
+    void User::setLightOn(){
+        auto* light = dynamic_cast<Light*>(devices[0].Get());
+        light->setDeviceStatus(1);
+    }
+
+    void User::setHeaterOn(){
+        auto* heater = dynamic_cast<Heater*>(devices[1].Get());
+        heater->setDeviceStatus(1);
+    }
+
     void User::readSensorDataFromRoomDemo() {
         while (true) {
             std::cout << "Enter a room type (0 = Living Room, 1 = Bedroom, 2 = Kitchen): ";
