@@ -18,7 +18,7 @@
 namespace smart_home
 {
 
-class SmartHome
+class SmartHome 
 {
 public:
     void GetDataFromXml(const char* filename);
@@ -26,6 +26,14 @@ public:
 
     std::vector<MyUniquePtr<Room>>& GetRooms();
     std::optional<Room*> GetRoom(const std::string &roomName);
+
+    const std::optional<Sensor*> GetSensor(const std::string& name);
+    const std::optional<Device*> GetDevice(const std::string& name);
+
+    bool DeleteSensor(const std::string &name);
+    bool DeleteDevice(const std::string &name);
+
+    const std::string Status();
 
 private:
     // Sensor& getSensorFromXml(tinyxml2::XMLElement* sensorElement);

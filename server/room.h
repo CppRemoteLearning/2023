@@ -10,16 +10,16 @@
 
 namespace smart_home {
 
-class Room
+class Room : public StatusObject
 {
 public:
     Room(const std::string &name = "");
 
     void AddSensor(MyUniquePtr<Sensor> &&sensor);
-    void DeleteSensor(const std::string &name);
+    bool DeleteSensor(const std::string &name);
 
     void AddDevice(MyUniquePtr<Device> &&device);
-    void DeleteDevice(const std::string &name);
+    bool DeleteDevice(const std::string &name);
 
     std::string& GetName();
     void SetName(const std::string &name);
@@ -29,6 +29,8 @@ public:
 
     const std::optional<Sensor*> GetSensor(const std::string& name);
     const std::optional<Device*> GetDevice(const std::string& name);
+
+    const std::string Status() override;
 
 private:
     std::string name_;

@@ -118,6 +118,68 @@ std::optional<Room*> SmartHome::GetRoom(const std::string &roomName)
     return std::nullopt;
 }
 
+const std::optional<Sensor*> SmartHome::GetSensor(const std::string& name) {
+    for (MyUniquePtr<Room>& room : rooms_)
+    {
+        if (std::optional<Sensor*> sensor = room->GetSensor(name))
+        {
+            return sensor;
+        }
+    }
+    
+    return std::nullopt;
+}
+
+const std::optional<Device*> SmartHome::GetDevice(const std::string &name)
+{
+    for (MyUniquePtr<Room>& room : rooms_)
+    {
+        if (std::optional<Device*> device = room->GetDevice(name))
+        {
+            return device;
+        }
+    }
+    
+    return std::nullopt;
+}
+
+bool SmartHome::DeleteSensor(const std::string &name) 
+{
+    for (MyUniquePtr<Room>& room : rooms_)
+    {
+        if (room->DeleteSensor(name))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool SmartHome::DeleteDevice(const std::string &name) 
+{
+    for (MyUniquePtr<Room>& room : rooms_)
+    {
+        if (room->DeleteDevice(name))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+const std::string SmartHome::Status()
+{
+    std::string status = "SmartHome\n\n";
+    for (MyUniquePtr<Room>& room : rooms_)
+    {
+        status += room->Status() + "\n\n";
+    }
+
+    return status;
+}
+
 // Sensor& SmartHome::getSensorFromXml(tinyxml2::XMLElement* sensorElement)
 // {
 //     const char* sensorName = sensorElement->Attribute("name");

@@ -20,7 +20,10 @@ public:
 private:
     std::string RequestString();
     std::string StatusAction();
+    std::string AddObject();
+    std::string DeleteObject();
     std::string GetAName();
+    void sendDataToServer(const char* message, int* clientSocket);
 
 };
     

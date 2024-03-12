@@ -11,17 +11,19 @@ void Room::AddSensor(MyUniquePtr<Sensor> &&sensor)
 
 }
 
-void Room::DeleteSensor(const std::string &name)
+bool Room::DeleteSensor(const std::string &name)
 {
     for (int i = 0; i < sensors_.size(); i++)
     {
         if (sensors_[i]->GetName() == name)
         {
             sensors_.erase(sensors_.begin() + i);
-            return;
+            return true;
         }
         
     }
+    
+    return false;
 }
 
 void Room::AddDevice(MyUniquePtr<Device> &&device)
@@ -29,16 +31,18 @@ void Room::AddDevice(MyUniquePtr<Device> &&device)
     devices_.emplace_back(std::move(device));
 }
 
-void Room::DeleteDevice(const std::string &name)
+bool Room::DeleteDevice(const std::string &name)
 {
     for (int i = 0; i < devices_.size(); i++)
     {
         if (devices_[i]->GetName() == name)
         {
             devices_.erase(devices_.begin() + i);
-            return;
+            return true;
         }
     }
+
+    return false;
 }
 
 
@@ -97,4 +101,23 @@ const std::optional<Device*> Room::GetDevice(const std::string &name)
 
     return std::nullopt;
 }
+
+const std::string Room::Status()
+{
+    std::string status = "Room " + name_ + "\n\n" + "Sensors:\n\n";
+    for(MyUniquePtr<Sensor>& sensor : sensors_)
+    {
+        status += sensor->Status() + '\n';
+    }
+
+    status+= "\nDevices:\n\n";
+
+    for(MyUniquePtr<Device>& device : devices_)
+    {
+        status += device->Status() + '\n';
+    }
+
+    return status;
+}
+
 } // namespace smart_home

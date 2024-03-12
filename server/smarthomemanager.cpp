@@ -100,6 +100,114 @@ namespace smart_home
         smartHome_.GetDataFromXml( filename.c_str());
     }
 
+   bool SmartHomeManager::getReqFromClient(int *clientSocket)
+    {
+        char buffer[1024] = {0};
+        int bytesReceived = recv(*clientSocket, buffer, sizeof(buffer), 0);
+        if (bytesReceived == 0)
+        {
+            std::cout<<"Client closed connection";
+            return false;
+        }
+        
+        if (bytesReceived <= -1) {
+            throw std::invalid_argument("Failed to receive data from server");
+            return false;
+        }
+
+        std::string aux(buffer);
+        std::vector<std::string> requestParam = split(aux, "-");
+
+        aux.clear();
+        if (requestParam[0] == "Status")
+        {
+            if (requestParam[1] == "Sensor")
+            {
+                if (const std::optional<Sensor*> sensor = smartHome_.GetSensor(requestParam[2]))
+                {
+                    aux = sensor.value()->Status();
+                }
+            }
+
+            if (requestParam[1] == "Device")
+            {
+                if (const std::optional<Device*> device = smartHome_.GetDevice(requestParam[2]))
+                {
+                    aux = device.value()->Status();
+                }
+            }
+
+            if (requestParam[1] == "Room")
+            {
+                if (const std::optional<Room*> room = smartHome_.GetRoom(requestParam[2]))
+                {
+                    aux = room.value()->Status();
+                }
+            }
+
+            if (requestParam[1] == "Home")
+            {
+                aux = smartHome_.Status();
+            }
+            
+        }
+
+        if (requestParam[0] == "Add")
+        {
+            if (requestParam[1] == "Sensor")
+            {
+                smartHome_.GetRoom("LivingRoom").value()->AddSensor(MyUniquePtr<Sensor>(new LightSensor(requestParam[2])));
+                aux = "Sensor added";
+            }
+
+            if (requestParam[1] == "Device")
+            {
+                smartHome_.GetRoom("LivingRoom").value()->AddDevice(MyUniquePtr<Device>(new Door(requestParam[2])));
+                aux = "Device added";
+            }
+        }
+
+        if (requestParam[0] == "Delete")
+        {
+            if (requestParam[1] == "Sensor")
+            {
+                if (smartHome_.DeleteSensor(requestParam[2]))
+                {
+                    aux = "Sensor Deleted";
+                }
+            }
+            else if (requestParam[1] == "Device")
+            {
+                if (smartHome_.DeleteDevice(requestParam[2]))
+                {
+                    aux = "Device Deleted";
+                }
+            }
+            else
+            {
+                aux = "Object not found";
+            }
+        }
+        
+        if (aux.empty())
+        {
+            aux = "The request was not formated right";
+        }
+        
+        sendDataToClient(aux.c_str(), clientSocket);
+
+        return true;
+    }
+
+    void SmartHomeManager::sendDataToClient(const char *message, int *clientSocket)
+    {
+        int bytesSent = send(*clientSocket, message, strlen(message), 0); 
+        if (bytesSent == -1) {
+            throw std::invalid_argument("Failed to send data to server");
+            return;
+        }
+    }
+
     void SmartHomeManager::StartServer()
     {
         try
@@ -133,15 +241,31 @@ namespace smart_home
                 return;
             }
 
-            char buffer[1024] = {0};
-            recv(*clientSocket, buffer, sizeof(buffer), 0);
-            std::cout << "Message from client: " << buffer << std::endl;
+            while (getReqFromClient(clientSocket.get()));
+            
         }
         catch(const std::invalid_argument& e)
         {
             std::cerr << e.what() << '\n';
         }
 
+    }
+
+    std::vector<std::string> SmartHomeManager::split(std::string input, std::string delimiter)
+    {        
+        std::vector<std::string> tokens;
+        int pos = 0;
+        std::string token;
+
+        while((pos = input.find(delimiter)) != std::string::npos){
+            token = input.substr(0, pos);
+            tokens.push_back(token);
+            input.erase(0, pos + 1);
+        }
+
+        tokens.push_back(input);
+
+        return tokens;
     }
 
 } // namespace smart_home

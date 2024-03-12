@@ -21,8 +21,11 @@ public:
     SmartHomeManager(SmartHome &smart_home);
     void Start();
     void StartServer();
-
+    std::vector<std::string> split(std::string input, std::string delimiter);
+    
 private:
+    bool getReqFromClient(int* clientSocket);
+    void sendDataToClient(const char* message, int* clientSocket);
     void DoChanges();
     void GetDataFromFile();
     SmartHome& smartHome_;
