@@ -8,6 +8,8 @@
 #include <unistd.h> 
 #include <memory>
 
+#include "message.h"
+
 namespace smart_home_client
 {
 
@@ -23,7 +25,7 @@ private:
     std::string AddObject();
     std::string DeleteObject();
     std::string GetAName();
-    void sendDataToServer(const char* message, int* clientSocket);
+    void sendDataToServer(const std::string& message, int* clientSocket);
 
 };
     

@@ -100,7 +100,7 @@ namespace smart_home
         smartHome_.GetDataFromXml( filename.c_str());
     }
 
-   bool SmartHomeManager::getReqFromClient(int *clientSocket)
+    bool SmartHomeManager::getReqFromClient(int *clientSocket)
     {
         char buffer[1024] = {0};
         int bytesReceived = recv(*clientSocket, buffer, sizeof(buffer), 0);
@@ -116,6 +116,10 @@ namespace smart_home
         }
 
         std::string aux(buffer);
+        std::stringstream ss(aux);
+        boost::archive::text_iarchive ia(ss);
+        Message deserializedMessage;
+        ia >> deserializedMessage;
         std::vector<std::string> requestParam = split(aux, "-");
 
         aux.clear();
@@ -231,17 +235,25 @@ namespace smart_home
                 return;
             }
 
-            listen(*server_fd, 5);
-            std::cout << "Server listening on port " << 8080 << std::endl;
+            ThreadPool pool;
+            int* clientSocket;
+            while(true)
+            {
+                listen(*server_fd, 5);
+                std::cout << "Server listening on port " << 8080 << std::endl;
 
-            MyUniquePtr<int, SocketDeleter> clientSocket(new int(accept(*server_fd, nullptr, nullptr)));
+                clientSocket = (new int(accept(*server_fd, nullptr, nullptr)));
 
-            if (*clientSocket == -1) {
-                throw std::invalid_argument("Failed to accept connection");
-                return;
+                if (*clientSocket == -1) {
+                    close(*clientSocket);
+                    throw std::invalid_argument("Failed to accept connection");
+                }
+
+                pool.enqueue([this, clientSocket]{
+                    MyUniquePtr<int, SocketDeleter> client(clientSocket);   
+                    while (getReqFromClient(clientSocket));
+                });
             }
-
-            while (getReqFromClient(clientSocket.get()));
             
         }
         catch(const std::invalid_argument& e)

@@ -7,10 +7,14 @@
 #include "Sensors/lightsensor.h"
 #include "Devices/acunit.h"
 #include "smarthomestatus.h"
+#include "thread_pool.h"
+#include "message.h"
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
-
+#include <string>
+#include <sstream> 
 
 namespace smart_home
 {
@@ -24,6 +28,7 @@ public:
     std::vector<std::string> split(std::string input, std::string delimiter);
     
 private:
+    void WaitForClientRequests(int* server_fd);
     bool getReqFromClient(int* clientSocket);
     void sendDataToClient(const char* message, int* clientSocket);
     void DoChanges();

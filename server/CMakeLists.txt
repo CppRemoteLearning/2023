@@ -10,6 +10,9 @@ smart_home.cpp
 smarthomestatus.cpp
 smarthomemanager.cpp 
 uniqueptr.h
-TinyXml/tinyxml2.cpp)
+thread_pool.cpp
+TinyXml/tinyxml2.cpp
+message.cpp
+)
 
 target_include_directories(smart_home PRIVATE TinyXml)

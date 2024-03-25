@@ -4,4 +4,5 @@ project(SmartHomeClient)
 add_executable(smart_home 
 main.cpp 
 smarthomeconnect.cpp
+message.cpp
 )

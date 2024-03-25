@@ -33,7 +33,7 @@ void SmartHomeConnect::StartConnection()
         {
             break;
         }
-	    sendDataToServer(reqStr.c_str(), clientSocket.get());
+	    sendDataToServer(reqStr, clientSocket.get());
     }
 
 	const char* message = ""; 
@@ -44,9 +44,17 @@ void SmartHomeConnect::StartConnection()
     }
 }
 
-void SmartHomeConnect::sendDataToServer(const char* message, int* clientSocket)
+void SmartHomeConnect::sendDataToServer(const std::string& message, int* clientSocket)
 {
-    int bytesSent = send(*clientSocket, message, strlen(message), 0); 
+    std::time_t now = time(0);
+    Message msg(message, "X", std::to_string(now));
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << msg;
+
+    const char* charMsg = ss.str().c_str();
+    std::cout << charMsg<<std::endl<<std::endl;
+    int bytesSent = send(*clientSocket, charMsg, strlen(charMsg), 0); 
     if (bytesSent == -1) {
         std::cerr << "Failed to send data to server" << std::endl;
         return;
