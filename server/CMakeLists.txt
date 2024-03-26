@@ -16,3 +16,5 @@ message.cpp
 )
 
 target_include_directories(smart_home PRIVATE TinyXml)
+find_package(Boost REQUIRED COMPONENTS serialization)
+target_link_libraries(smart_home Boost::serialization)

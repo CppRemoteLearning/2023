@@ -100,29 +100,52 @@ namespace smart_home
         smartHome_.GetDataFromXml( filename.c_str());
     }
 
-    bool SmartHomeManager::getReqFromClient(int *clientSocket)
+    Message& SmartHomeManager::getMessageFromReq(int *clientSocket) const
     {
-        char buffer[1024] = {0};
+        char buffer[2048] = {0};
         int bytesReceived = recv(*clientSocket, buffer, sizeof(buffer), 0);
         if (bytesReceived == 0)
         {
             std::cout<<"Client closed connection";
-            return false;
         }
         
         if (bytesReceived <= -1) {
             throw std::invalid_argument("Failed to receive data from server");
-            return false;
         }
 
-        std::string aux(buffer);
-        std::stringstream ss(aux);
-        boost::archive::text_iarchive ia(ss);
-        Message deserializedMessage;
-        ia >> deserializedMessage;
-        std::vector<std::string> requestParam = split(aux, "-");
+        Message* deserializedMessage = new Message;
+        {
+            std::istringstream ss(buffer);
+            std::cout << "Serialized message data: " << ss.str() << std::endl;
+            if (!ss.good())
+            {
+                throw "the message is not ok";
+            }
+            
+            boost::archive::text_iarchive ia(ss);
+            ia >> *deserializedMessage;
+        }
 
-        aux.clear();
+        return *deserializedMessage;
+    }
+
+    bool SmartHomeManager::getReqFromClient(int *clientSocket)
+    {
+        Message deserializedMessage;
+        try
+        {
+            deserializedMessage = getMessageFromReq(clientSocket);
+        }
+        catch(const std::exception& e)
+        {
+            std::cout << e.what() << '\n';
+            return false;
+        }
+        
+        LogRequestsCredentialsInFile(deserializedMessage);
+        std::vector<std::string> requestParam = split(deserializedMessage.text_, "-");
+        std::string aux;
+        
         if (requestParam[0] == "Status")
         {
             if (requestParam[1] == "Sensor")
@@ -278,6 +301,12 @@ namespace smart_home
         tokens.push_back(input);
 
         return tokens;
+    }
+
+    void SmartHomeManager::LogRequestsCredentialsInFile(const Message& message)
+    {
+        std::ofstream logFile("../data_files/LogFile.txt", std::ios::app);
+        logFile << "Username: " << message.sender_ << "; Date: "<< message.date_ << "\n";
     }
 
 } // namespace smart_home

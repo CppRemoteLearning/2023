@@ -16,6 +16,7 @@ namespace smart_home_client
 class SmartHomeConnect
 {
 public:
+    SmartHomeConnect();
     void StartConnection();
 
 
@@ -26,7 +27,9 @@ private:
     std::string DeleteObject();
     std::string GetAName();
     void sendDataToServer(const std::string& message, int* clientSocket);
+    std::stringstream& GetSerializedMessage(const std::string& message);
 
+    std::string username_;
 };
     
 class SocketDeleter {

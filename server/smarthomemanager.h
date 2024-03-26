@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <string>
 #include <sstream> 
+#include <fstream>
 
 namespace smart_home
 {
@@ -26,9 +27,10 @@ public:
     void Start();
     void StartServer();
     std::vector<std::string> split(std::string input, std::string delimiter);
-    
+    void LogRequestsCredentialsInFile(const Message& message);  
+
 private:
-    void WaitForClientRequests(int* server_fd);
+    Message& getMessageFromReq(int *clientSocket) const;
     bool getReqFromClient(int* clientSocket);
     void sendDataToClient(const char* message, int* clientSocket);
     void DoChanges();

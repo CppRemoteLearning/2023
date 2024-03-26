@@ -3,7 +3,7 @@
 
 namespace smart_home_client
 {
-
+    SmartHomeConnect::SmartHomeConnect(): username_{""} {}
 
 void SmartHomeConnect::StartConnection()
 {
@@ -15,6 +15,13 @@ void SmartHomeConnect::StartConnection()
         return;
     }
     
+    while (username_.length() <= 2)
+    {
+        std::cout<<"Enter a username that has at least 3 characters\n";
+        std::cin>>username_;
+    }
+    
+
 	sockaddr_in serverAddress; 
 	serverAddress.sin_family = AF_INET; 
 	serverAddress.sin_port = htons(8080); 
@@ -25,6 +32,8 @@ void SmartHomeConnect::StartConnection()
         std::cerr << "Failed to bind socket" << std::endl;
         return;
     } 
+
+    
 
     while (true)
     {
@@ -44,16 +53,23 @@ void SmartHomeConnect::StartConnection()
     }
 }
 
-void SmartHomeConnect::sendDataToServer(const std::string& message, int* clientSocket)
+std::stringstream& SmartHomeConnect::GetSerializedMessage(const std::string &message)
 {
-    std::time_t now = time(0);
-    Message msg(message, "X", std::to_string(now));
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << msg;
+    std::time_t t = time(0);
+    std::tm* now = std::localtime(&t);
+    std::string date = std::to_string(now->tm_year + 1900) + "-" + std::to_string(now->tm_mon + 1) + '-' + std::to_string(now->tm_mday);
 
-    const char* charMsg = ss.str().c_str();
-    std::cout << charMsg<<std::endl<<std::endl;
+    Message msg(message, username_, date);
+    std::stringstream* ss = new std::stringstream;
+    boost::archive::text_oarchive oa(*ss);
+    oa << msg;
+    return *ss;
+}
+
+void SmartHomeConnect::sendDataToServer(const std::string& message, int* clientSocket)
+{   
+    std::string msg = GetSerializedMessage(message).str();
+    const char* charMsg = msg.c_str();
     int bytesSent = send(*clientSocket, charMsg, strlen(charMsg), 0); 
     if (bytesSent == -1) {
         std::cerr << "Failed to send data to server" << std::endl;
